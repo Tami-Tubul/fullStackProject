@@ -1,0 +1,6 @@
+.borderContainer {
+    border: 5px solid black;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
