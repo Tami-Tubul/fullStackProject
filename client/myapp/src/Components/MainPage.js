@@ -10,19 +10,17 @@ const MainPageComp = () => {
 
     const storeData = useSelector(state => state)
 
-    const [tabColor, setTabColor] = useState({})
+    const [tabActice, setTabActive] = useState({})
 
     return (<>
 
         {storeData.loginUser && <h2> Welcome {storeData.loginUser.firstName + " " + storeData.loginUser.lastName}</h2>}
-
-        <Tabs style={{ display: "inline-flex" }} centered >
-            <Link to="movies" onClick={() => setTabColor({movies: "gold" })} style={{ textDecoration: "none", padding: "10px", border: "1px solid black", margin: "5px" ,background:tabColor.movies}}>Movies</Link>
-            <Link to="subscriptions" onClick={() => setTabColor({subscriptions: "gold" })} style={{ textDecoration: "none", padding: "10px", border: "1px solid black", margin: "5px" ,background:tabColor.subscriptions}}>Subscriptions</Link>
-            {storeData.loginUser?.userName === "Admin" && <Link to="userManagement" onClick={() => setTabColor({userManagement: "gold" })} style={{ textDecoration: "none", padding: "10px", border: "1px solid black", margin: "5px" ,background:tabColor.userManagement}}>User Management</Link>}
-            <Link to="/" style={{ textDecoration: "none", padding: "10px", border: "1px solid black", margin: "5px" }}>Log Out</Link>
-        </Tabs>
-
+         <ul>
+            <Link className={`tab ${tabActice.users === undefined ? "" : "active"}`} to="movies" onClick={() => setTabActive({ users: "active" })}>Movies</Link>
+            <Link className={`tab ${tabActice.subscriptions === undefined ? "" : "active"}`} to="subscriptions" onClick={() => setTabActive({subscriptions: "active" })}>Subscriptions</Link>
+            {storeData.loginUser?.userName === "Admin" && <Link className={`tab ${tabActice.userManagement === undefined ? "" : "active"}`} to="userManagement" onClick={() => setTabActive({userManagement: "active" })} >User Management</Link>}
+            <Link className="logOutLink" to="/" >Log Out</Link>
+        </ul>
         <Outlet />
 
     </>)

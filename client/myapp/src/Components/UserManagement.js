@@ -23,14 +23,11 @@ const UserManagementComp = () => {
     <BorderContainer>
 
       <h3>Users</h3>
-      <ul>
-        <li>
+      
           <Link className={`tab ${tabActice.users === undefined ? "" : "active"}`} to="users" onClick={() => setTabActive({ users: "active" })}>All Users</Link>
-        </li>
-        <li>
+       
           <Link className={`tab ${tabActice.addUser === undefined ? "" : "active"}`} to="addUser" onClick={() => setTabActive({ addUser: "active" })}>Add User</Link>
-        </li>
-      </ul>
+      
 
       <Outlet />
       {/* </div> */}
