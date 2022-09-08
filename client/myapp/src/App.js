@@ -14,21 +14,21 @@ function App() {
   return (
     <div className='App'>
 
-      <h1>Movies - Subscription Web Site</h1>
+        <h1>Movies - Subscription Web Site</h1>
+      
+        <Routes>
+          <Route path='/' element={<LoginComp />} />
+          <Route path='/createAccount' element={<CreateAccountComp />} />
 
-      <Routes>
-        <Route path='/' element={<LoginComp />} />
-        <Route path='/createAccount' element={<CreateAccountComp />} />
-
-        <Route path='/mainPage' element={<MainPageComp />} >
-          <Route path='movies' element={<MoviesComp />} />
-          <Route path='subscriptions' element={<SubscriptionsComp />} />
-          <Route path='userManagement' element={<UserManagementComp />} >
-            <Route path='users' element={<UsersComp/>} />
-            <Route path='addUser' element={<AddUsersComp/>} />
+          <Route path='/mainPage' element={<MainPageComp />} >
+            <Route path='movies' element={<MoviesComp />} />
+            <Route path='subscriptions' element={<SubscriptionsComp />} />
+            <Route path='userManagement' element={<UserManagementComp />} >
+              <Route path='users' element={<UsersComp />} />
+              <Route path='addUser' element={<AddUsersComp />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
 
     </div>
   );

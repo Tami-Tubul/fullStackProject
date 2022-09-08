@@ -2,17 +2,19 @@ import { useEffect, useState } from 'react';
 //import { useSelector } from 'react-redux';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import BorderContainer from '../UI/BorderContainer';
-
+import '../UI/tabsStyle.css'
 
 const UserManagementComp = () => {
 
-  const [tabColor, setTabColor] = useState({})
   const navigate = useNavigate()
- // const storeData = useSelector(state => state)
+
+  const [tabActice, setTabActive] = useState({})
+
+  // const storeData = useSelector(state => state)
 
   useEffect(() => {
     navigate("users")
-    setTabColor({ users: "gold" })
+    setTabActive({ users: "active" })
   }, [])
 
   return (
@@ -21,11 +23,17 @@ const UserManagementComp = () => {
     <BorderContainer>
 
       <h3>Users</h3>
-      <Link to="users" onClick={() => setTabColor({ users: "gold" })} style={{ textDecoration: "none", padding: "2px", border: "1px solid black", margin: "5px", background: tabColor.users }}>All Users</Link>
-      <Link to="addUser" onClick={() => setTabColor({ addUser: "gold" })} style={{ textDecoration: "none", padding: "2px", border: "1px solid black", margin: "5px", background: tabColor.addUser }}>Add User</Link>
+      <ul>
+        <li>
+          <Link className={`tab ${tabActice.users === undefined ? "" : "active"}`} to="users" onClick={() => setTabActive({ users: "active" })}>All Users</Link>
+        </li>
+        <li>
+          <Link className={`tab ${tabActice.addUser === undefined ? "" : "active"}`} to="addUser" onClick={() => setTabActive({ addUser: "active" })}>Add User</Link>
+        </li>
+      </ul>
 
       <Outlet />
-    {/* </div> */}
+      {/* </div> */}
     </BorderContainer>
   )
 }

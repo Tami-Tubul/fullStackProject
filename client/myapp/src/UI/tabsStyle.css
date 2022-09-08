@@ -1,0 +1,10 @@
+.tab {
+    text-decoration: none;
+    padding: 2px;
+    margin: 5px;
+    border: 1px solid black;
+}
+
+.tab.active {
+    background: gold;
+}

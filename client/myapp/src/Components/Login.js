@@ -1,10 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Input, FormLabel, FormControl, FormGroup } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 import utils from '../utils';
-import ErrorComp from '../UI/Error';
+
+import { FormGroup } from '@material-ui/core';
+
+import AlertComp from '../UI/Alert';
+import ButtonComp from '../UI/Button';
+import FormControlComp from '../UI/FormControl';
 
 
 
@@ -44,27 +48,22 @@ const LoginComp = () => {
     return (<>
 
         <h2>Log in Page</h2>
+
         <form onSubmit={e => checkUser(e)} autoComplete="off" style={{ width: "300px", height: "300px", marginRight: "auto", marginLeft: "auto", padding: "60px", border: "2px solid black" }}>
-            <FormGroup >
-                <FormControl>
-                    <FormLabel htmlFor='userName'>User name: </FormLabel>
-                    <Input id='userName' type='text' onChange={e => setUser({ ...user, userName: e.target.value })} required /> <br />
-                </FormControl>
-                <FormControl>
-                    <FormLabel htmlFor='password'>Password: </FormLabel>
-                    <Input id='password' type='password' onChange={e => setUser({ ...user, password: e.target.value })} required></Input> <br />
-                </FormControl>
-                <Button type='submit' variant="contained"
-                    color="default">Login</Button><br />
+            <FormGroup>
+                
+                <FormControlComp id="userName" type="text" label="User Name" required="required" onChange={e => setUser({ ...user, userName: e.target.value })} />
+                <FormControlComp id="password" type="password" label="Password" required="required" onChange={e => setUser({ ...user, password: e.target.value })} />
 
-                {/* {error.length !== 0 && <span style={{ color: "red" }}>{error}</span>} */}
+                <ButtonComp typeBtn='submit' variant="contained" color="default" textBtn="Login" /><br />
 
-                {error.length !== 0 && <ErrorComp errorMessage={error}></ErrorComp>}
+                {error.length !== 0 && <AlertComp errorMessage={error} />}
 
-                <br />
             </FormGroup>
+            <br />
             <span>New User? </span>
             <Link to='./createAccount'>Create Account</Link>
+
         </form>
     </>
     )
