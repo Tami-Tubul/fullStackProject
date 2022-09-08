@@ -54,8 +54,8 @@ const CreateAccountComp = () => {
       <form className='form' onSubmit={e => checkUser(e)} autoComplete="off" >
         <FormGroup>
 
-          <FormControlComp id="userName" type="text" label="User Name" required="required" onChange={e => setUser({ ...user, userName: e.target.value })} />
-          <FormControlComp id="password" type="password" label="Password" required="required" onChange={e => setUser({ ...user, password: e.target.value })} />
+          <FormControlComp id="userName" type="text" label="User Name" isRequired="true" onChange={e => setUser({ ...user, userName: e.target.value })} />
+          <FormControlComp id="password" type="password" label="Password" isRequired="true" onChange={e => setUser({ ...user, password: e.target.value })} />
 
           <ButtonComp typeBtn='submit' variant="contained" color="default" textBtn="Create" /><br />
 
