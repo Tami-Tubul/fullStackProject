@@ -19,7 +19,6 @@ const UserManagementComp = () => {
 
   return (
 
-    // <div style={{ border: "5px solid black", width: "50%", marginRight: "auto", marginLeft: "auto" }}>
     <BorderContainer>
 
       <h3>Users</h3>
@@ -30,7 +29,7 @@ const UserManagementComp = () => {
       
 
       <Outlet />
-      {/* </div> */}
+
     </BorderContainer>
   )
 }
