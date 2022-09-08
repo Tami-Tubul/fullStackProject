@@ -1,8 +1,8 @@
 import { Link, Outlet} from "react-router-dom";
 import { useSelector } from 'react-redux';
-import {Tabs } from "@material-ui/core";
 import { useState } from "react";
 import * as React from 'react';
+import '../UI/style.css'
 
 
 const MainPageComp = () => {

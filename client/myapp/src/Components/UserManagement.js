@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 //import { useSelector } from 'react-redux';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import BorderContainer from '../UI/BorderContainer';
-import '../UI/tabsStyle.css'
+import '../UI/style.css'
 
 const UserManagementComp = () => {
 

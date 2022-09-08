@@ -9,7 +9,7 @@ import { FormGroup } from '@material-ui/core';
 import AlertComp from '../UI/Alert';
 import ButtonComp from '../UI/Button';
 import FormControlComp from '../UI/FormControl';
-
+import '../UI/style.css'
 
 
 const LoginComp = () => {
@@ -49,7 +49,7 @@ const LoginComp = () => {
 
         <h2>Log in Page</h2>
 
-        <form onSubmit={e => checkUser(e)} autoComplete="off" style={{ width: "300px", height: "300px", marginRight: "auto", marginLeft: "auto", padding: "60px", border: "2px solid black" }}>
+        <form className='form' onSubmit={e => checkUser(e)} autoComplete="off">
             <FormGroup>
                 
                 <FormControlComp id="userName" type="text" label="User Name" required="required" onChange={e => setUser({ ...user, userName: e.target.value })} />

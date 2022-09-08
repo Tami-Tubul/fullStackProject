@@ -1,4 +1,4 @@
-import './BorderContainer.css'
+import './style.css'
 
 const BorderContainer = (props) => {
 
