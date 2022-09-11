@@ -5,7 +5,7 @@ function FormControlComp(props) {
     <>
         <FormControl>
           <FormLabel htmlFor={props.id}>{props.label}</FormLabel>
-          <Input id={props.id} type={props.type} placeholder={props.label} required onChange={props.onChange} />
+          <Input id={props.id} type={props.type} {...props} onChange={props.onChange} />
         </FormControl>
         <br/>
     </>
