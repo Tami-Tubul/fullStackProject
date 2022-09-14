@@ -4,7 +4,7 @@ import { memo } from 'react';
 const ButtonComp = memo((props) => {
   return (
     <> 
-       <Button type={props.typeBtn} variant="contained">{props.textBtn}</Button>
+       <Button type={props.typeBtn} variant="contained" onClick={props.onClick}>{props.textBtn}</Button>
     </>
   );
 })

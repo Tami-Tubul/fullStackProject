@@ -1,11 +1,11 @@
 import { Checkbox, FormControlLabel } from "@material-ui/core";
 
-const PermissionsComp = () => {
+const PermissionsComp = (props) => {
 
     return (
         <fieldset>
             <legend>Permissions:</legend>
-            <FormControlLabel control={<Checkbox color="default"/>} label="View Subscriptions" />
+            <FormControlLabel control={<Checkbox color="default" {...props}/>} label="View Subscriptions" />
             <FormControlLabel control={<Checkbox color="default"/>} label="Create Subscriptions" />
             <FormControlLabel control={<Checkbox color="default"/>} label="Delete Subscriptions" />
             <FormControlLabel control={<Checkbox color="default"/>} label="Update Subscriptions" />

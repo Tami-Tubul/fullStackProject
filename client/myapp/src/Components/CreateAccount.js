@@ -8,6 +8,7 @@ import { FormGroup } from '@material-ui/core';
 import AlertComp from '../UI/Alert';
 import ButtonComp from '../UI/Button';
 import FormControlComp from '../UI/FormControl';
+import { useSelector } from 'react-redux';
 
 
 
@@ -18,14 +19,13 @@ const CreateAccountComp = () => {
   const [error, setError] = useState("")
 
   const navigate = useNavigate()
+  const storeData = useSelector(state => state)
 
   const checkUser = async (e) => {
     e.preventDefault();
 
-    let resp = await utils.getAllItems("http://localhost:5000/api/users");
-    let allUsers = resp.data;
-    let userIsExist = allUsers.find(x => x.userName === user.userName)
-    let passwordIsExist = allUsers.find(x => x.password === user.password)
+    let userIsExist = storeData.users.find(x => x.userName === user.userName)
+    let passwordIsExist = storeData.users.find(x => x.password === user.password)
 
     if (userIsExist) {
       if (!passwordIsExist) {

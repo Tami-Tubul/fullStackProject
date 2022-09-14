@@ -1,7 +1,8 @@
 import { FormGroup } from "@material-ui/core";
 import ButtonComp from "../UI/Button";
 import FormControlComp from "../UI/FormControl";
-import PermissionsComp from "./Permissions";
+import PermissionsComp from "../UI/Permissions";
+
 
 const AddUserComp = () => {
 

@@ -1,8 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-
-import utils from '../utils';
 
 import { FormGroup } from '@material-ui/core';
 
@@ -18,22 +16,20 @@ const LoginComp = () => {
     const [error, setError] = useState("")
 
     const dispatch = useDispatch()
+    const storeData = useSelector(state => state)
     const navigate = useNavigate()
 
 
     const checkUser = async (e) => {
         e.preventDefault();
 
-        let resp = await utils.getAllItems("http://localhost:5000/api/users")
-        let allUsers = resp.data;
-
-        let userIsExist = allUsers.find(x => x.userName === user.userName)
-        let passwordIsExist = allUsers.find(x => x.password === user.password)
+        let userIsExist = storeData.users.find(x => x.userName === user.userName)
+        let passwordIsExist = storeData.users.find(x => x.password === user.password)
 
         if (userIsExist) {
             if (passwordIsExist) {
-                navigate("/mainPage")
                 dispatch({ type: "LOGIN", payload: userIsExist })
+                navigate("/mainPage")
             }
             else {
                 setError("Invalid password!")
