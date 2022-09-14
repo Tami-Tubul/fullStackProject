@@ -17,7 +17,6 @@ const LoginComp = () => {
 
     const dispatch = useDispatch()
     const storeUsers = useSelector(state => state.usersReducer)
-    console.log(storeUsers);
     const navigate = useNavigate()
 
 
@@ -43,7 +42,7 @@ const LoginComp = () => {
     }
 
     return (<>
-    {console.log("render...")}
+    
         <h2>Log in Page</h2>
 
         <form className='form' onSubmit={e => checkUser(e)} autoComplete="off">

@@ -1,6 +1,6 @@
 import {Input, FormLabel, FormControl } from '@material-ui/core';
 
-function FormControlComp(props) {
+const FormControlComp = (props) => {
   return (
     <>
         <FormControl>

@@ -14,7 +14,7 @@ const EditUserComp = () => {
   const users = useSelector(state => state.usersReducer.users)
   const dispatch = useDispatch()
   const params = useParams()
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({firstName:"" , lastName : "" , userName: "", sessionTimeOut: 0})
   const navigate = useNavigate()
 
 
