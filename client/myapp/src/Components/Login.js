@@ -16,15 +16,16 @@ const LoginComp = () => {
     const [error, setError] = useState("")
 
     const dispatch = useDispatch()
-    const storeData = useSelector(state => state)
+    const storeUsers = useSelector(state => state.usersReducer)
+    console.log(storeUsers);
     const navigate = useNavigate()
 
 
     const checkUser = async (e) => {
         e.preventDefault();
 
-        let userIsExist = storeData.users.find(x => x.userName === user.userName)
-        let passwordIsExist = storeData.users.find(x => x.password === user.password)
+        let userIsExist = storeUsers.users.find(x => x.userName === user.userName)
+        let passwordIsExist = storeUsers.users.find(x => x.password === user.password)
 
         if (userIsExist) {
             if (passwordIsExist) {

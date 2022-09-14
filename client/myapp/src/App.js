@@ -27,7 +27,7 @@ function App() {
     }
     getAllUsers()
     
-  }, [dispatch])
+  }, [])
 
   return (
     <div className='App'>

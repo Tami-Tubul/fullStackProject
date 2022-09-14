@@ -12,7 +12,7 @@ const UsersContainerComp = () => {
    useEffect(() => {
      setTabActive({ users: "active" })
      navigate("users")
-  }, [navigate])
+  }, [])
 
   return (
 

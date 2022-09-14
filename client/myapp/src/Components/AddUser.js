@@ -9,7 +9,7 @@ const AddUserComp = () => {
 
   return (
     <>
-      <h4>AddUserComp</h4>
+      <h4>Add User</h4>
       <form className="form">
         <FormGroup>
           <FormControlComp id="firstName" type="text" label="First Name:" />

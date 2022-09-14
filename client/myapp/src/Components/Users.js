@@ -3,7 +3,7 @@ import UserComp from "./User"
 
 const UsersComp = () => {
 
-  const users = useSelector(state => state.users)
+  const users = useSelector(state => state.usersReducer.users)
 
   return (
 

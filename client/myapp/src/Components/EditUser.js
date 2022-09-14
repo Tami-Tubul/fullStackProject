@@ -11,7 +11,7 @@ import toast from 'toast-me';
 
 const EditUserComp = () => {
 
-  const users = useSelector(state => state.users)
+  const users = useSelector(state => state.usersReducer.users)
   const dispatch = useDispatch()
   const params = useParams()
   const [user, setUser] = useState({})
