@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddUserComp from './Components/AddUser';
@@ -10,9 +12,22 @@ import SubscriptionsComp from './Components/Subscriptions';
 import UserManagementComp from './Components/UserManagement';
 import UsersComp from './Components/Users';
 import UsersContainerComp from './Components/UsersContainer';
+import utils from './utils';
 
 function App() {
+  
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+
+    //load users
+    const getAllUsers = async () => {
+      const resp = await utils.getAllItems("http://localhost:5000/api/users")
+      dispatch({ type: "LOAD_USERS", payload: resp.data })
+    }
+    getAllUsers()
+    
+  }, [])
 
   return (
     <div className='App'>

@@ -1,27 +1,15 @@
-import { useEffect, useState } from "react"
-import utils from "../utils"
+import { useSelector } from "react-redux"
 import UserComp from "./User"
 
 const UsersComp = () => {
- 
-  const [users, setUsers] = useState([])
 
+  const users = useSelector(state => state.users)
 
-  useEffect(() => {
-    const getAllUsers = async () => {
-      const resp = await utils.getAllItems("http://localhost:5000/api/users")
-      const allUsers = resp.data;
-      setUsers(allUsers)
-    }
-    getAllUsers()
-  }, [])
-  
   return (
 
     <>
-   
       {
-        users.map(item => {
+        users?.map(item => {
           return <UserComp key={item._id} userData={item} />
         })
       }
