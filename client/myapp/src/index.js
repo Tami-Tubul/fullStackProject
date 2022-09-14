@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import rootReducer from './Reducers/rootReducer';
 
 const appStore = createStore(rootReducer)
-console.log(appStore.getState())
+//console.log(appStore.getState()) // show the state in the store
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

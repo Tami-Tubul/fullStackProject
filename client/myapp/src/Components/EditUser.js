@@ -36,6 +36,7 @@ const EditUserComp = () => {
     if (status.data === "updated!") {
        toast("The user was updated!", { duration: 3000 })
        dispatch({type: "UPDATE_USER" , payload: updatedUser})
+           navigate("/mainPage/userManagement/users")
        
     }
 
