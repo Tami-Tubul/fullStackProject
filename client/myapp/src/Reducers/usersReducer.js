@@ -1,4 +1,4 @@
-function appReducer(state = { loginUser: {}, users: [] }, action) {
+function usersReducer(state = { loginUser: {}, users: [] }, action) {
 
     switch (action.type) {
 
@@ -25,4 +25,4 @@ function appReducer(state = { loginUser: {}, users: [] }, action) {
 
 }
 
-export default appReducer;
+export default usersReducer;

@@ -6,9 +6,7 @@ const AlertComp = (props) => {
 
     return(
       <>
-      <Alert severity="error">
-          {props.errorMessage}
-        </Alert>
+      <Alert severity={props.severity}>{props.message}</Alert>
       </>
     )
 }

@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import appReducer from './reducer';
+import rootReducer from './Reducers/rootReducer';
 
-const appStore = createStore(appReducer)
-
+const appStore = createStore(rootReducer)
+console.log(appStore.getState())
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -18,7 +18,7 @@ root.render(
       <App />
     </BrowserRouter>
   </Provider>
-);
+); 
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

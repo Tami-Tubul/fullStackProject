@@ -59,7 +59,7 @@ const CreateAccountComp = () => {
 
           <ButtonComp typeBtn='submit' variant="contained" color="default" textBtn="Create" /><br />
 
-          {error.length !== 0 && <AlertComp errorMessage={error} />}
+          {error.length !== 0 && <AlertComp message={error} severity="error"/>}
 
         </FormGroup>
        

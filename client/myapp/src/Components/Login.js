@@ -28,7 +28,7 @@ const LoginComp = () => {
 
         if (userIsExist) {
             if (passwordIsExist) {
-                dispatch({ type: "LOGIN", payload: userIsExist })
+                dispatch({ type: "LOGIN_USER", payload: userIsExist })
                 navigate("/mainPage")
             }
             else {
@@ -53,7 +53,7 @@ const LoginComp = () => {
 
                 <ButtonComp typeBtn='submit' variant="contained" color="default" textBtn="Login" /><br />
 
-                {error.length !== 0 && <AlertComp errorMessage={error} />}
+                {error.length !== 0 && <AlertComp message={error} severity="error"/>}
 
             </FormGroup>
             <br />
