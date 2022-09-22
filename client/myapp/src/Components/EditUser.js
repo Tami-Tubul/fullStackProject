@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ButtonComp from "../UI/Button";
 import FormControlComp from "../UI/FormControl";
 import PermissionsComp from "../UI/Permissions";
-import utils from '../utils'
+import utils from '../Utilities/utils';
 import toast from 'toast-me';
 
 

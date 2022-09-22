@@ -1,6 +1,7 @@
 const express = require("express")
 
 const usersRouter = require("./routes/usersRouter")
+const authRouter = require("./routes/authRouter")
 const membersRouter = require("./routes/membersRouter")
 const moviesRouter = require("./routes/moviesRouter")
 const subscriptionsRouter = require("./routes/subscriptionsRouter")
@@ -12,10 +13,12 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
-app.use("/api/users",usersRouter)
-app.use("/api/members",membersRouter)
-app.use("/api/movies",moviesRouter)
-app.use("/api/subscriptions",subscriptionsRouter)
+app.use("/api/users", usersRouter)
+app.use("/api/auth", authRouter)
+app.use("/api/members", membersRouter)
+app.use("/api/movies", moviesRouter)
+app.use("/api/subscriptions", subscriptionsRouter)
+
 
 require("./configs/database")
 

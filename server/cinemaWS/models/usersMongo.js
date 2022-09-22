@@ -13,6 +13,21 @@ const getUsersFromMongo = () => {
     })
 }
 
+const getUserFromMongo = (userName,password) => {
+    return new Promise((resolve, reject) => {
+        usersModel.findOne({
+            userName: userName,
+            password: password
+        }, function (err, data) {
+            if (err) {
+                reject(err)
+            }
+            else {
+                resolve(data)
+            }
+        })
+    })
+}
 
 const addUserToMongo = (obj) => {
     return new Promise((resolve, reject) => {
@@ -59,4 +74,4 @@ const deleteUserFromMongo = (id) => {
         })
     })
 }
-module.exports = { getUsersFromMongo, addUserToMongo, updateUserOnMongo, deleteUserFromMongo }
+module.exports = { getUsersFromMongo, getUserFromMongo, addUserToMongo, updateUserOnMongo, deleteUserFromMongo }

@@ -15,12 +15,17 @@ const getAllUsers = async () => {
 }
 
 const getUserByID = async (id) => {
+    
     let allUsers = await usersDal.getUsers()
     let user = allUsers.find(x => x._id == id)
+
     let usersPermissions = await permissionsDal.getPermissions()
     let userPermissions = usersPermissions.find(y => y._id == id)
 
-    let fullUserData = { _id: user._id, firstName: user.firstName, lastName: user.lastName, createdDate: user.createdDate, sessionTimeOut: user.sessionTimeOut, permissions: userPermissions.permissions }
+    let usersDataFromMongo = await usersMongo.getUsersFromMongo()
+    let userDataFromMongo = usersDataFromMongo.find(y => y._id == id)
+
+    let fullUserData = { _id: user._id, firstName: user.firstName, lastName: user.lastName, userName: userDataFromMongo.userName, password: userDataFromMongo.password, createdDate: user.createdDate, sessionTimeOut: user.sessionTimeOut, permissions: userPermissions.permissions }
 
     return fullUserData;
 }

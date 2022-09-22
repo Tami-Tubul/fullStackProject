@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 
-import utils from '../utils';
+import utils from '../Utilities/utils';
 
 import { FormGroup } from '@material-ui/core';
 

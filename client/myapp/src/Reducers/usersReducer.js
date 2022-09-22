@@ -1,9 +1,14 @@
-function usersReducer(state = { loginUser: {}, users: [] }, action) {
+
+let initialState = {
+    users: []
+}
+
+function usersReducer(state = { initialState }, action) {
 
     switch (action.type) {
 
-        case "LOGIN_USER":
-            return { ...state, loginUser: action.payload }
+        case "CONNECTED_USER":
+            return { ...state, connectedUser: JSON.parse(action.payload) } //connectedUser - all user details
 
         case "LOAD_USERS":
             return { ...state, users: action.payload }

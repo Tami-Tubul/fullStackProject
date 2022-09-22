@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import AddUserComp from './Components/AddUser';
 import CreateAccountComp from './Components/CreateAccount';
@@ -12,11 +12,13 @@ import SubscriptionsComp from './Components/Subscriptions';
 import UserManagementComp from './Components/UserManagement';
 import UsersComp from './Components/Users';
 import UsersContainerComp from './Components/UsersContainer';
-import utils from './utils';
+import utils from './Utilities/utils';
+
 
 function App() {
-  
+
   const dispatch = useDispatch()
+ 
 
   useEffect(() => {
 
@@ -26,8 +28,8 @@ function App() {
       dispatch({ type: "LOAD_USERS", payload: resp.data })
     }
     getAllUsers()
-    
-  }, [])
+
+  }, [dispatch])
 
   return (
     <div className='App'>
@@ -35,7 +37,8 @@ function App() {
       <h1>Movies - Subscription Web Site</h1>
 
       <Routes>
-        <Route path='/' element={<LoginComp />} />
+        <Route path='/' element={<Navigate to="/auth/login" />} />
+        <Route path='/auth/login' element={<LoginComp />} />
         <Route path='/createAccount' element={<CreateAccountComp />} />
         <Route path='/mainPage' element={<MainPageComp />} >
           <Route path='movies' element={<MoviesComp />} />
