@@ -2,9 +2,17 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,body {
+  min-height: 100%;
+  background-color: #1d1b1b;
+  background-image: url("./Images/banner.jpg");
+  filter: grayscale(20%);
+  background-size: 100%;
+}
+
+
+h1 {
+  color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,6 +40,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

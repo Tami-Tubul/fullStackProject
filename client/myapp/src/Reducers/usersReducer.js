@@ -8,7 +8,7 @@ function usersReducer(state = { initialState }, action) {
     switch (action.type) {
 
         case "CONNECTED_USER":
-            return { ...state, connectedUser: JSON.parse(action.payload) } //connectedUser - all user details
+            return { ...state, connectedUser: action.payload } //connectedUser - all user details
 
         case "LOAD_USERS":
             return { ...state, users: action.payload }

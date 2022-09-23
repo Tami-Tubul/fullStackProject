@@ -1,24 +1,25 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import AddUserComp from './Components/AddUser';
-import CreateAccountComp from './Components/CreateAccount';
-import EditUserComp from './Components/EditUser';
-import LoginComp from './Components/Login';
+import CreateAccountComp from './Components/Auth/CreateAccount';
+import LoginComp from './Components/Auth/Login';
 import MainPageComp from './Components/MainPage';
-import MoviesComp from './Components/Movies'
-import SubscriptionsComp from './Components/Subscriptions';
-import UserManagementComp from './Components/UserManagement';
-import UsersComp from './Components/Users';
-import UsersContainerComp from './Components/UsersContainer';
+import MoviesComp from './Components/Movies/Movies';
+import SubscriptionsComp from './Components/Subscriptions/Subscriptions';
+import AddUserComp from './Components/Users/AddUser';
+import EditUserComp from './Components/Users/EditUser';
+import UsersComp from './Components/Users/Users';
+import UsersContainerComp from './Components/Users/UsersContainer';
+import UsersManagementComp from './Components/Users/UsersManagement';
+import HeaderComp from './Layouts/Header';
 import utils from './Utilities/utils';
 
 
 function App() {
 
   const dispatch = useDispatch()
- 
+  const storeUsers = useSelector(state => state.usersReducer)
 
   useEffect(() => {
 
@@ -31,27 +32,35 @@ function App() {
 
   }, [dispatch])
 
+
+  useEffect(() => {
+    if(sessionStorage["user"])
+    {
+      dispatch({ type: "CONNECTED_USER", payload: JSON.parse(sessionStorage["user"]) })
+    }
+    
+  }, [sessionStorage])
+  
+
   return (
     <div className='App'>
-
-      <h1>Movies - Subscription Web Site</h1>
-
-      <Routes>
-        <Route path='/' element={<Navigate to="/auth/login" />} />
-        <Route path='/auth/login' element={<LoginComp />} />
-        <Route path='/createAccount' element={<CreateAccountComp />} />
-        <Route path='/mainPage' element={<MainPageComp />} >
-          <Route path='movies' element={<MoviesComp />} />
-          <Route path='subscriptions' element={<SubscriptionsComp />} />
-          <Route path='userManagement' element={<UserManagementComp />} >
+      <HeaderComp />
+      <main>
+        <Routes>
+          <Route path='/auth/login' element={<LoginComp />} />
+          <Route path='/createAccount' element={<CreateAccountComp />} />
+          <Route path='/' element={storeUsers.connectedUser !== undefined ? <MainPageComp /> : <Navigate to="/auth/login" />} />
+          <Route path='/movies' element={<MoviesComp />} />
+          <Route path='/subscriptions' element={<SubscriptionsComp />} />
+          <Route path='/usersManagement' element={<UsersManagementComp />} >
             <Route path='' element={<UsersContainerComp />} >
               <Route path='users' element={<UsersComp />} />
               <Route path='addUser' element={<AddUserComp />} />
             </Route>
             <Route path='editUser/:id' element={<EditUserComp />} />
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </main>
 
     </div>
   );
