@@ -7,10 +7,10 @@ import { FormGroup } from '@material-ui/core';
 import AlertComp from '../../UI/Alert';
 import ButtonComp from '../../UI/Button';
 import FormControlComp from '../../UI/FormControl';
-import './auth.css';
+import './Auth.css';
 
 import authService from '../../Utilities/authService'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const LoginComp = () => {
 
@@ -19,7 +19,6 @@ const LoginComp = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
-  const storeUsers = useSelector(state => state.usersReducer)
 
     const login = async (e) => {
 
@@ -51,7 +50,7 @@ const LoginComp = () => {
     return (
         <>
             <CardComp>
-                <h2 className="form-heading">Log in Page</h2>
+                <h2 className="form-heading">Log in</h2>
                 <hr></hr>
                 <br />
                 <form className='form' onSubmit={e => login(e)} autoComplete="off">

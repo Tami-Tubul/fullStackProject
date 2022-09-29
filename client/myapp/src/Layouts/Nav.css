@@ -1,5 +1,6 @@
 nav {
-   margin-left: 15%;
+   margin: auto;
+
 }
 
 
@@ -26,7 +27,15 @@ nav ul li a.active {
 }
 
 
-header nav ul li a {
+nav ul li a {
    color: white;
    text-decoration: none;
+}
+
+main nav {
+   width: 50%;
+}
+
+main nav ul li a:not(.active){
+   color: #2E1C98;
 }

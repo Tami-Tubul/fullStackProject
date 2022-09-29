@@ -2,15 +2,19 @@ import "./Header.css"
 import NavComp from "./Nav";
 import doorIcon from '../Images/door.png'
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import authService from "../Utilities/authService";
 
-const HeaderComp = () => {
+const HeaderComp = (props) => {
 
     const navigate = useNavigate()
     const storeUsers = useSelector(state => state.usersReducer)
+    const dispatch = useDispatch()
+
 
     const logOut = () => {
         sessionStorage.clear();
+        dispatch({ type: "CONNECTED_USER", payload: authService.getUser() })
         navigate("/auth/login")
     }
 
@@ -18,9 +22,12 @@ const HeaderComp = () => {
         <>
             <header>
                 <h1>Cinema Website</h1>
-                {storeUsers.connectedUser !== undefined && <>
-                    <NavComp />
-                    <img className="door-icon" src={doorIcon} width="50" onClick={logOut} />
+                {storeUsers.connectedUser && <>
+                    <NavComp uname={props.uname} />
+                    <span className="user-name">
+                        <i>Hello {props.fname} {props.lname}</i>
+                        <img className="door-icon" src={doorIcon} width="50" onClick={logOut} />
+                    </span>
                 </>}
 
             </header>

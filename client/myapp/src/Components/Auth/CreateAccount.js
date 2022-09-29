@@ -2,14 +2,13 @@ import CardComp from "../../UI/Card";
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import utils from '../../Utilities/utils';
-import { useSelector } from 'react-redux';
 
 import { FormGroup } from '@material-ui/core';
-
+import toast from 'toast-me';
 import AlertComp from '../../UI/Alert';
 import ButtonComp from '../../UI/Button';
 import FormControlComp from '../../UI/FormControl';
-import './auth.css';
+import './Auth.css';
 
 
 const CreateAccountComp = () => {
@@ -19,13 +18,14 @@ const CreateAccountComp = () => {
   const [error, setError] = useState("")
 
   const navigate = useNavigate()
-  const storeUsers = useSelector(state => state.usersReducer)
 
   const checkUser = async (e) => {
-    e.preventDefault();
-
-    let userIsExist = storeUsers.users.find(x => x.userName === user.userName)
-    let passwordIsExist = storeUsers.users.find(x => x.password === user.password)
+    e.preventDefault(); 
+   
+    let resp = await utils.getAllItems("http://localhost:5000/api/users")
+    let allUsers = resp.data;
+    let userIsExist = allUsers.find(x => x.userName === user.userName)
+    let passwordIsExist = allUsers.find(x => x.password === user.password)
 
     if (userIsExist) {
       if (!passwordIsExist) {
@@ -33,7 +33,7 @@ const CreateAccountComp = () => {
         let upsatedUser = userIsExist;
         let status = await utils.editItem("http://localhost:5000/api/users", userIsExist._id, upsatedUser)
         if (status.data === "updated!") {
-          alert("updated!")
+          toast("This user's password has been updated!" ,{ duration: 2000} )
           navigate("/auth/login")
         }
       }

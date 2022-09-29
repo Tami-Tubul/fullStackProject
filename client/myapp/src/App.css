@@ -12,7 +12,11 @@ html,body {
 
 
 h1 {
-  color: white;
+  color: white ;
+}
+
+h2,h3 {
+  color: #2E1C98;
 }
 
 @media (prefers-reduced-motion: no-preference) {

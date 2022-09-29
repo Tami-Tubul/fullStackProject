@@ -13,7 +13,7 @@ const saveToken = (token) => {
 }
 
 const saveUser = (user) => {
-    sessionStorage["user"] = JSON.stringify(user);
+    sessionStorage["user"] = user;
 
 }
 
@@ -21,5 +21,9 @@ const getToken = () => {
     return sessionStorage["token"]
 }
 
+const getUser = () => {
+    return sessionStorage["user"]
+}
 
-export default { login, saveToken, saveUser, getToken }
+
+export default { login, saveToken, saveUser, getToken ,getUser}

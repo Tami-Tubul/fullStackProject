@@ -1,12 +1,15 @@
+import {  useSelector } from "react-redux";
 import welcomeGif from "../Images/welcome.gif"
 import CardComp from "../UI/Card";
 
 
 const MainPageComp = () => {
 
-    return (<CardComp>
+    const storeUsers = useSelector(state => state.usersReducer)
 
-        <img src={welcomeGif}  />
+    return (<CardComp>
+        <h2 style={{color: "#E82041"}}>Hi {storeUsers.connectedUser.firstName}</h2>
+        <img src={welcomeGif} />
     </CardComp>
 
     )

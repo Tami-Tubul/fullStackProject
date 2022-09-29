@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
@@ -13,46 +13,31 @@ import UsersComp from './Components/Users/Users';
 import UsersContainerComp from './Components/Users/UsersContainer';
 import UsersManagementComp from './Components/Users/UsersManagement';
 import HeaderComp from './Layouts/Header';
+import LoaderComp from './UI/Loader';
+import authService from './Utilities/authService';
 import utils from './Utilities/utils';
 
 
 function App() {
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch()
   const storeUsers = useSelector(state => state.usersReducer)
 
-  useEffect(() => {
-
-    //load users
-    const getAllUsers = async () => {
-      const resp = await utils.getAllItems("http://localhost:5000/api/users")
-      dispatch({ type: "LOAD_USERS", payload: resp.data })
-    }
-    getAllUsers()
-
-  }, [dispatch])
-
-
-  useEffect(() => {
-    if(sessionStorage["user"])
-    {
-      dispatch({ type: "CONNECTED_USER", payload: JSON.parse(sessionStorage["user"]) })
-    }
-    
-  }, [sessionStorage])
-  
 
   return (
     <div className='App'>
-      <HeaderComp />
+
+      <HeaderComp uname={storeUsers?.connectedUser?.userName} fname={storeUsers?.connectedUser?.firstName} lname={storeUsers?.connectedUser?.lastName} />
       <main>
         <Routes>
           <Route path='/auth/login' element={<LoginComp />} />
           <Route path='/createAccount' element={<CreateAccountComp />} />
-          <Route path='/' element={storeUsers.connectedUser !== undefined ? <MainPageComp /> : <Navigate to="/auth/login" />} />
-          <Route path='/movies' element={<MoviesComp />} />
-          <Route path='/subscriptions' element={<SubscriptionsComp />} />
-          <Route path='/usersManagement' element={<UsersManagementComp />} >
+          <Route path='/' element={storeUsers?.connectedUser ? <MainPageComp /> : <Navigate to="/auth/login" />} />
+          <Route path='/movies' element={storeUsers?.connectedUser ? <MoviesComp /> : <Navigate to="/auth/login" />} />
+          <Route path='/subscriptions' element={storeUsers?.connectedUser ? <SubscriptionsComp /> : <Navigate to="/auth/login" />} />
+          <Route path='/usersManagement' element={storeUsers?.connectedUser ? <UsersManagementComp /> : <Navigate to="/auth/login" />} >
             <Route path='' element={<UsersContainerComp />} >
               <Route path='users' element={<UsersComp />} />
               <Route path='addUser' element={<AddUserComp />} />
