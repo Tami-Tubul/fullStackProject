@@ -6,14 +6,14 @@ const UsersComp = () => {
   const storeUsers = useSelector(state => state.usersReducer)
 
 
-  return (<>
-  {
-    storeUsers.users.map(user => {
-      return <UserComp userData={user} key={user._id}/>
-    })
-  }
-  
-  </>
+  return (<div>
+    {
+      storeUsers.users.map(user => {
+        return <> <UserComp userData={user} key={user._id} /><br /> </>
+      })
+    }
+
+  </div>
 
   )
 }
