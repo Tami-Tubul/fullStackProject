@@ -1,5 +1,4 @@
 import { NavLink, Outlet } from "react-router-dom";
-import CardComp from "../../UI/Card";
 
 const UsersContainerComp = () => {
 

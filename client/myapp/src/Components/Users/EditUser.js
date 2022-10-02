@@ -60,8 +60,8 @@ const EditUserComp = () => {
 
           <br />
 
-          <ButtonComp typeBtn='submit' variant="contained" color="default" textBtn="Update" /><br />
-          <ButtonComp typeBtn='button' variant="contained" color="default" textBtn="Cancel" onClick={cancelFunc} /><br />
+          <ButtonComp typeBtn='submit' variant="contained" color="default" >Update</ButtonComp><br />
+          <ButtonComp typeBtn='button' variant="contained" color="default" onClick={cancelFunc} >Cancel</ButtonComp><br />
 
         </FormGroup>
       </form>

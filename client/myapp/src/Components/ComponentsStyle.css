@@ -1,0 +1,52 @@
+.grid {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-gap: 15px;
+    place-content: center;
+    grid-template-columns: 45% 45%;
+    width: 100%;
+
+}
+
+.content-box {
+    display: flex;
+    flex-flow: column;
+    border: 2px solid red;
+    border-radius: 20px;
+
+}
+
+.text-box {
+    flex-grow: 1;
+}
+
+.actions-box {
+    padding-bottom: 4px;
+}
+
+.scroll-div{
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+/* width */
+.scroll-div::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  .scroll-div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .scroll-div::-webkit-scrollbar-thumb {
+    background: #2E1C98; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .scroll-div::-webkit-scrollbar-thumb:hover {
+    background: #2f1c98c5; 
+  }

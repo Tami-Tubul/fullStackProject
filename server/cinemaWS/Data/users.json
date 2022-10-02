@@ -1,1 +1,26 @@
-{"users":[{"_id":"62e30472b240cc756db36713","firstName":"Avi","lastName":"Cohen","createdDate":"28/07/2022","sessionTimeOut":10},{"_id":"632cb88a014f292b39ffeb5c","firstName":"Dana","lastName":"Levi","createdDate":"22/09/2022","sessionTimeOut":5}]}
+{
+    "users": [
+        {
+            "_id": "62e30472b240cc756db36713",
+            "firstName": "Avi",
+            "lastName": "Cohen",
+            "createdDate": "28/07/2022",
+            "sessionTimeOut": 10
+        },
+        {
+            "_id": "632cb88a014f292b39ffeb5c",
+            "firstName": "Dana",
+            "lastName": "Levi",
+            "createdDate": "22/09/2022",
+            "sessionTimeOut": 5
+        },
+        {
+            "_id": "633a0712174f600b07e3bb4a",
+            "firstName": "Gil",
+            "lastName": "Revivo",
+            "createdDate": "03/10/2022",
+            "sessionTimeOut": 2
+        }
+    ]
+}
+

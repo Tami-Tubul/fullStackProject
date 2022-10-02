@@ -59,7 +59,7 @@ const CreateAccountComp = () => {
             <FormControlComp id="userName" type="text" label="User Name" required onChange={e => setUser({ ...user, userName: e.target.value })} />
             <FormControlComp id="password" type="password" label="Password" required onChange={e => setUser({ ...user, password: e.target.value })} />
 
-            <ButtonComp typeBtn='submit' variant="contained" color="default" textBtn="Create" /><br />
+            <ButtonComp typeBtn='submit' variant="contained" color="default">Create</ButtonComp><br />
 
             {error.length !== 0 && <AlertComp message={error} severity="error" />}
 

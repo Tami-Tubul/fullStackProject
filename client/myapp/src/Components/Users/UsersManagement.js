@@ -21,7 +21,7 @@ const UsersManagementComp = () => {
 
 
     return (
-        <CardComp>
+        <CardComp width="60%">
             <h2>Users</h2>
             <hr></hr>
             <Outlet/>

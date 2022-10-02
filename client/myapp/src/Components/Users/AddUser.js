@@ -20,8 +20,8 @@ const AddUserComp = () => {
           
           <br />
 
-          <ButtonComp typeBtn='submit' variant="contained" color="default" textBtn="Save" /><br />
-          <ButtonComp typeBtn='submit' variant="contained" color="default" textBtn="Cancel" /><br />
+          <ButtonComp typeBtn='submit' variant="contained" color="default">Save</ButtonComp><br />
+          <ButtonComp typeBtn='submit' variant="contained" color="default" >Cancel</ButtonComp><br />
 
         </FormGroup>
       </form>

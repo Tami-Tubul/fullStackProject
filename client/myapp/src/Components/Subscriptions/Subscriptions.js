@@ -5,7 +5,7 @@ const SubscriptionsComp = () => {
 
   return(
 
-    <CardComp> <h2>Subscriptions</h2></CardComp>
+    <CardComp width="60%"> <h2>Subscriptions</h2></CardComp>
    
   )
 }

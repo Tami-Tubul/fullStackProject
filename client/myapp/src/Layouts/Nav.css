@@ -1,12 +1,15 @@
-nav {
-   margin: auto;
-
+header nav {
+   position: absolute;
 }
 
 
-nav ul {
+ nav ul {
    display: flex;
+   justify-content: center;
+   padding-left: 0px;
 }
+
+
 
 nav ul li {
    font-size: 1.2rem;
@@ -33,7 +36,8 @@ nav ul li a {
 }
 
 main nav {
-   width: 50%;
+   margin: auto;
+   width: 30%;
 }
 
 main nav ul li a:not(.active){
