@@ -15,7 +15,7 @@ const getAllUsers = async () => {
 }
 
 const getUserByID = async (id) => {
-    
+
     let allUsers = await usersDal.getUsers()
     let user = allUsers.find(x => x._id == id)
 
@@ -50,7 +50,7 @@ const addUser = async (obj) => {
         let statusPermissions = await permissionsDal.savePermissions({ "permissions": allPermissions })
 
         if (statusUsers && statusPermissions == "Done!")
-            return status;
+            return { status: status, userId: newUserID, createdDate: newUser.createdDate };
     }
 
 
@@ -58,12 +58,12 @@ const addUser = async (obj) => {
 
 const editUser = async (id, obj) => {
 
-    let updatedUserName = { userName: obj.userName , password: obj.password}
+    let updatedUserName = { userName: obj.userName, password: obj.password }
 
     let status = await usersMongo.updateUserOnMongo(id, updatedUserName)
 
     if (status == "updated!") {
-       
+
         let updatedUser = { _id: id, firstName: obj.firstName, lastName: obj.lastName, createdDate: obj.createdDate, sessionTimeOut: obj.sessionTimeOut }
         let allUsers = await usersDal.getUsers()
         let userIndex = allUsers.findIndex(x => x._id == id)
@@ -96,14 +96,14 @@ const deleteUser = async (id) => {
         let allUsers = await usersDal.getUsers()
         let userIndex = allUsers.findIndex(x => x._id == id)
         if (userIndex > -1) {
-            allUsers.splice(userIndex,1);
+            allUsers.splice(userIndex, 1);
         }
         let statusUsers = await usersDal.saveUsers({ "users": allUsers })
 
         let allPermissions = await permissionsDal.getPermissions()
         let permissionsIndex = allPermissions.findIndex(x => x._id == id)
         if (permissionsIndex > -1) {
-            allPermissions.splice(permissionsIndex,1)
+            allPermissions.splice(permissionsIndex, 1)
         }
         let statusPermissions = await permissionsDal.savePermissions({ "permissions": allPermissions })
 

@@ -24,7 +24,6 @@ function App() {
 
   return (
     <div className='App'>
-      {console.log("render app....")}
       <HeaderComp uname={storeUsers?.connectedUser?.userName} fname={storeUsers?.connectedUser?.firstName} lname={storeUsers?.connectedUser?.lastName} />
       <main>
 

@@ -21,6 +21,7 @@ const EditUserComp = () => {
 
   useEffect(() => {
     let userForEdit = users && users.find(x => x._id === params.id)
+    console.log(users);
     setUser(userForEdit)
   }, [users, params.id])
 
@@ -52,7 +53,7 @@ const EditUserComp = () => {
           <FormControlComp id="lastName" type="text" label="Last Name:" value={user?.lastName} onChange={e => setUser({ ...user, lastName: e.target.value })} />
           <FormControlComp id="userName" type="text" label="User Name:" value={user?.userName} onChange={e => setUser({ ...user, userName: e.target.value })} />
           <FormControlComp id="sessionTimeOut" type="number" label="Session Time Out (Minutes):" value={user?.sessionTimeOut} onChange={e => setUser({ ...user, sessionTimeOut: e.target.value })} />
-          <FormControlComp id="createdDate" type="text" label="Created Date:" value={user?.createdDate} readonly disabled />
+          <FormControlComp id="createdDate" type="text" label="Created Date:" value={user?.createdDate} inputProps={{ readOnly: true,}} disabled variant="filled" />
 
           {/* <PermissionsComp /> */}
 
