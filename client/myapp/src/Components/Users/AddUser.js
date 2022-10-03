@@ -27,14 +27,14 @@ const AddUserComp = () => {
   ]
 
 
-  //יצירת מערך של סימונים בצקבוקסים
+  // Creating an array of choices the same length as the array of permissions
   const [checkedState, setCheckedState] = useState(
     new Array(permissionsArr.length).fill(false)
   );
 
   const handleChange = (position) => {
 
-    //מעדכן את מערך הסימונים בהתאם לבחירות
+    //Updating the array of choices according to the choice
     const updateCheckedState = checkedState.map((item, index) => {
       return position === index ? !item : item;
     })
@@ -43,6 +43,7 @@ const AddUserComp = () => {
 
     let perm = [...permissionsArr]
 
+    //Filtering the permissions array according to the choices array
     let filteredPerm = perm.filter((item, index) => updateCheckedState[index] == true);
     setUser({ ...user, permissions: filteredPerm })
 
