@@ -2,15 +2,16 @@ import authService from "../Utilities/authService"
 
 let initialState = {
     users: [],
-    connectedUser: authService.getUser()
+   // connectedUser: authService.getUser()
+    connectedUser: {userName:"Admin" , password:"1qaz2wsx"},
 }
 
-function usersReducer(state = { initialState }, action) {
+function usersReducer(state = initialState, action) {
 
     switch (action.type) {
 
         case "CONNECTED_USER":
-            return { ...state, connectedUser: action.payload } //connectedUser - all user details
+            return { ...state, connectedUser: action.payload} //connectedUser - all user details
 
         case "LOAD_USERS":
             return { ...state, users: action.payload }

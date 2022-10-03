@@ -10,6 +10,7 @@ const UsersContainerComp = () => {
                     <li><NavLink to="users" className={navData => navData.isActive ? "active" : ''}>All Users</NavLink></li>
                     <li><NavLink to="addUser" className={navData => navData.isActive ? "active" : ''}>Add User</NavLink></li>
                 </ul>
+            
             </nav>
             
             

@@ -25,6 +25,7 @@ const UsersManagementComp = () => {
             <h2>Users</h2>
             <hr></hr>
             <Outlet/>
+          
 
         </CardComp>
     )

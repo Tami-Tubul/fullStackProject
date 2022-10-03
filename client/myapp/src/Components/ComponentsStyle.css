@@ -25,7 +25,7 @@
 }
 
 .scroll-div{
-    max-height: 350px;
+    max-height: 55vh;
     overflow-y: auto;
 }
 

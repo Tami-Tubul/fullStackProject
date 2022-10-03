@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import CreateAccountComp from './Components/Auth/CreateAccount';
@@ -13,25 +12,23 @@ import UsersComp from './Components/Users/Users';
 import UsersContainerComp from './Components/Users/UsersContainer';
 import UsersManagementComp from './Components/Users/UsersManagement';
 import HeaderComp from './Layouts/Header';
-import LoaderComp from './UI/Loader';
-import authService from './Utilities/authService';
-import utils from './Utilities/utils';
+
+
 
 
 function App() {
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const dispatch = useDispatch()
   const storeUsers = useSelector(state => state.usersReducer)
+
 
 
   return (
     <div className='App'>
-
+      {console.log("render app....")}
       <HeaderComp uname={storeUsers?.connectedUser?.userName} fname={storeUsers?.connectedUser?.firstName} lname={storeUsers?.connectedUser?.lastName} />
       <main>
-        <Routes>
+
+       <Routes>
           <Route path='/auth/login' element={<LoginComp />} />
           <Route path='/createAccount' element={<CreateAccountComp />} />
           <Route path='/' element={storeUsers?.connectedUser ? <MainPageComp /> : <Navigate to="/auth/login" />} />
