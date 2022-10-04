@@ -85,7 +85,8 @@ const AddUserComp = () => {
           <FormControlComp id="userName" type="text" label="User Name:" required onChange={e => setUser({ ...user, userName: e.target.value })} />
           <FormControlComp id="sessionTimeOut" type="number" label="Session Time Out (Minutes):" required onChange={e => setUser({ ...user, sessionTimeOut: e.target.value })} />
 
-          {
+          <fieldset style={{width : "77%" , margin:"auto"}}>
+            <legend>permissions:</legend>{
             permissionsArr.map((per, index) => {
               return <FormControlLabel key={index}
                 control={
@@ -95,6 +96,7 @@ const AddUserComp = () => {
               />
             })
           }
+          </fieldset>
 
           <br />
 
