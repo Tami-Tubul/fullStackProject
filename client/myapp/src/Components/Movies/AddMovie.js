@@ -1,13 +1,14 @@
 
 
-const MoviesComp = () => {
+const AddMovieComp = () => {
 
 
   return (<div className="scroll-div">
 
     <div className="grid">
 
-      list of all movies
+      AddMovieComp
+
     </div>
 
   </div>
@@ -15,4 +16,4 @@ const MoviesComp = () => {
   )
 }
 
-export default MoviesComp;
+export default AddMovieComp;

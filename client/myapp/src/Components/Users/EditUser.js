@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -88,8 +88,8 @@ const EditUserComp = () => {
           <FormControlComp id="sessionTimeOut" type="number" label="Session Time Out (Minutes):" value={user?.sessionTimeOut} onChange={e => setUser({ ...user, sessionTimeOut: e.target.value })} />
           <FormControlComp id="createdDate" type="text" label="Created Date:" value={user?.createdDate} inputProps={{ readOnly: true, }} disabled variant="filled" />
 
-          <fieldset style={{ width: "77%", margin: "auto" }}>
-            <legend>permissions:</legend>
+          <FormControl style={{ width:"77%", display:"inline-block", margin:"auto"}} component="fieldset" variant="standard">
+            <FormLabel component="legend">permissions:</FormLabel>
             {
               permissionsArr.map((per, index) => {
                 return <FormControlLabel key={index}
@@ -99,13 +99,13 @@ const EditUserComp = () => {
                   label={per}
                 />
               })
-            }</fieldset>
+            }</FormControl>
 
           <br />
-         
-            <ButtonComp typeBtn='submit' variant="contained" color="default" >Update</ButtonComp><br />
-            <ButtonComp typeBtn='button' variant="contained" color="default" onClick={cancelFunc} >Cancel</ButtonComp><br />
-          
+
+          <ButtonComp typeBtn='submit' variant="contained" color="default" >Update</ButtonComp><br />
+          <ButtonComp typeBtn='button' variant="contained" color="default" onClick={cancelFunc} >Cancel</ButtonComp><br />
+
         </FormGroup>
       </form>
     </div>

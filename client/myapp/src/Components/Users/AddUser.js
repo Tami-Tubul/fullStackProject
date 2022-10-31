@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from "@material-ui/core";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -85,18 +85,19 @@ const AddUserComp = () => {
           <FormControlComp id="userName" type="text" label="User Name:" required onChange={e => setUser({ ...user, userName: e.target.value })} />
           <FormControlComp id="sessionTimeOut" type="number" label="Session Time Out (Minutes):" required onChange={e => setUser({ ...user, sessionTimeOut: e.target.value })} />
 
-          <fieldset style={{width : "77%" , margin:"auto"}}>
-            <legend>permissions:</legend>{
-            permissionsArr.map((per, index) => {
-              return <FormControlLabel key={index}
-                control={
-                  <Checkbox checked={checkedState[index]} onChange={() => handleChange(index)} name={per} />
-                }
-                label={per}
-              />
-            })
-          }
-          </fieldset>
+
+          <FormControl style={{ width:"77%", display:"inline-block", margin:"auto"}} component="fieldset" variant="standard">
+            <FormLabel component="legend">permissions:</FormLabel>
+            {
+              permissionsArr.map((per, index) => {
+                return <FormControlLabel key={index}
+                  control={
+                    <Checkbox checked={checkedState[index]} onChange={() => handleChange(index)} name={per} />
+                  }
+                  label={per}
+                />
+              })
+            }</FormControl>
 
           <br />
 
