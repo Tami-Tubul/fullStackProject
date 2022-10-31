@@ -1,10 +1,12 @@
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import CreateAccountComp from './Components/Auth/CreateAccount';
 import LoginComp from './Components/Auth/Login';
 import MainPageComp from './Components/MainPage';
+import AddMovieComp from './Components/Movies/AddMovie';
 import MoviesComp from './Components/Movies/Movies';
+import MoviesContainerComp from './Components/Movies/MoviesContainer';
 import SubscriptionsComp from './Components/Subscriptions/Subscriptions';
 import AddUserComp from './Components/Users/AddUser';
 import EditUserComp from './Components/Users/EditUser';
@@ -27,12 +29,18 @@ function App() {
       <HeaderComp uname={storeUsers?.connectedUser?.userName} fname={storeUsers?.connectedUser?.firstName} lname={storeUsers?.connectedUser?.lastName} />
       <main>
 
-       <Routes>
+        <Routes>
           <Route path='/auth/login' element={<LoginComp />} />
           <Route path='/createAccount' element={<CreateAccountComp />} />
           <Route path='/' element={storeUsers?.connectedUser ? <MainPageComp /> : <Navigate to="/auth/login" />} />
-          <Route path='/movies' element={storeUsers?.connectedUser ? <MoviesComp /> : <Navigate to="/auth/login" />} />
-          <Route path='/subscriptions' element={storeUsers?.connectedUser ? <SubscriptionsComp /> : <Navigate to="/auth/login" />} />
+          <Route path='/movies' element={storeUsers?.connectedUser ? <MoviesContainerComp /> : <Navigate to="/auth/login" />} >
+            <Route path='allMovies' element={<MoviesComp />} />
+            <Route path='addMovie' element={<AddMovieComp />} />
+          </Route>
+          <Route path='/subscriptions' element={storeUsers?.connectedUser ? <SubscriptionsComp /> : <Navigate to="/auth/login" />}>
+            {/* <Route path='allMembers' element={<MembersComp />} />
+            <Route path='addMember' element={<AddMemberComp />} /> */}
+          </Route>
           <Route path='/usersManagement' element={storeUsers?.connectedUser ? <UsersManagementComp /> : <Navigate to="/auth/login" />} >
             <Route path='' element={<UsersContainerComp />} >
               <Route path='users' element={<UsersComp />} />
@@ -40,6 +48,7 @@ function App() {
             </Route>
             <Route path='editUser/:id' element={<EditUserComp />} />
           </Route>
+
         </Routes>
       </main>
 
