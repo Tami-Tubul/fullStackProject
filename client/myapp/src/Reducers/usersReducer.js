@@ -2,8 +2,7 @@ import authService from "../Utilities/authService"
 
 let initialState = {
     users: [],
-    // connectedUser: authService.getUser()
-    connectedUser: { userName: "Admin", password: "1qaz2wsx" },
+    connectedUser: authService.getUser()
 }
 
 function usersReducer(state = initialState, action) {

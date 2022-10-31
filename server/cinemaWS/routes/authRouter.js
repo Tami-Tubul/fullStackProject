@@ -5,32 +5,6 @@ const jwt = require("jsonwebtoken")
 
 const usersBL = require("../models/usersBL")
 
-// router.get("/", async function (req, resp) {
-
-//     const RSA_PRIVATE_KEY = "somekey";
-//     let token = req.headers['x-access-token'];
-
-//     if (!token) {
-//         return resp.status(401).send({ message: "No token provided." })
-//     }
-
-//     jwt.verify(token, RSA_PRIVATE_KEY, async function (err, decoded) {
-//         if (err)
-//             return resp.status(500).send({ message: "Failed to authenticate token." })
-
-//         else {
-
-//             let allUsers = await usersBL.getAllUsers()
-//             return resp.status(200).json(allUsers)
-
-//         }
-
-//     })
-
-
-// })
-
-
 router.post("/login", async function (req, resp) {
 
     let userName = req.body.userName;
@@ -60,6 +34,32 @@ router.post("/login", async function (req, resp) {
     
 
 })
+
+
+// router.get("/", async function (req, resp) {
+
+//     const RSA_PRIVATE_KEY = "somekey";
+//     let token = req.headers['x-access-token'];
+
+//     if (!token) {
+//         return resp.status(401).send({ message: "No token provided." })
+//     }
+
+//     jwt.verify(token, RSA_PRIVATE_KEY, async function (err, decoded) {
+//         if (err)
+//             return resp.status(500).send({ message: "Failed to authenticate token." })
+
+//         else {
+
+//             let allUsers = await usersBL.getAllUsers()
+//             return resp.status(200).json(allUsers)
+
+//         }
+
+//     })
+
+
+// })
 
 
 module.exports = router;
