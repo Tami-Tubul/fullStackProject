@@ -3,13 +3,12 @@ import CardComp from "../../UI/Card";
 
 const SubscriptionsComp = () => {
 
-
   return (
 
     <CardComp width="60%">
       <h2>Subscriptions</h2>
       <hr></hr>
-
+      
       <nav>
         <ul>
           <li><NavLink to="members" className={navData => navData.isActive ? "active" : ''}>All Members</NavLink></li>
