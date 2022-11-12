@@ -50,3 +50,7 @@
   .scroll-div::-webkit-scrollbar-thumb:hover {
     background: #2f1c98c5; 
   }
+
+  .moviesFiltering {
+    display: inline-flex;
+  }

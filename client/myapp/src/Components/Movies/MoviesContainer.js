@@ -1,24 +1,32 @@
 import { NavLink, Outlet } from "react-router-dom";
+import ButtonComp from "../../UI/Button";
 import CardComp from "../../UI/Card";
+import FormControlComp from "../../UI/FormControl";
 
 const MoviesContainerComp = () => {
 
 
   return (<CardComp width="60%">
-            <h2>Movies</h2>
-            <hr></hr>
+    <h2>Movies</h2>
+    <hr></hr>
+   
+    <div className="moviesFiltering">
+    
+      <nav>
+        <ul>
+          <li><NavLink to="allMovies" className={navData => navData.isActive ? "active" : ''}>All Movies</NavLink></li>
+          <li><NavLink to="addMovie" className={navData => navData.isActive ? "active" : ''}>Add Movie</NavLink></li>
+        </ul>
 
-            <nav>
-                <ul>
-                    <li><NavLink to="allMovies" className={navData => navData.isActive ? "active" : ''}>All Movies</NavLink></li>
-                    <li><NavLink to="addMovie" className={navData => navData.isActive ? "active" : ''}>Add Movie</NavLink></li>
-                </ul>
-            
-            </nav>
+      </nav>
 
-            <Outlet/>
+      <FormControlComp label="Find Movie" type="search" /><ButtonComp width="10%">Find</ButtonComp>
 
-          </CardComp>
+    </div>
+
+    <Outlet />
+
+  </CardComp>
 
   )
 }
