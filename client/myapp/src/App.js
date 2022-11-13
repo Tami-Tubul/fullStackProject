@@ -33,7 +33,7 @@ function App() {
           <Route path='/auth/login' element={<LoginComp />} />
           <Route path='/createAccount' element={<CreateAccountComp />} />
           <Route path='/' element={storeUsers?.connectedUser ? <MainPageComp /> : <Navigate to="/auth/login" />} />
-          <Route path='/movies' element={storeUsers?.connectedUser ? <MoviesContainerComp /> : <Navigate to="/auth/login" />} >
+          <Route path='/movies/*' element={storeUsers?.connectedUser ? <MoviesContainerComp /> : <Navigate to="/auth/login" />} >
             <Route path='allMovies' element={<MoviesComp />} />
             <Route path='addMovie' element={<AddMovieComp />} />
           </Route>
