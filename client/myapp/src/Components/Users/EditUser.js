@@ -66,8 +66,8 @@ const EditUserComp = () => {
     let updatedUser = user;
     let status = await utils.editItem("http://localhost:5000/api/users", params.id, updatedUser)
     if (status.data === "updated!") {
-      toast("The user was updated!", { duration: 3000 })
       dispatch({ type: "UPDATE_USER", payload: updatedUser })
+      toast("The user was updated!", { duration: 3000 })
       navigate(-1)
 
     }

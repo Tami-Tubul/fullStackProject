@@ -12,8 +12,9 @@ const UserComp = ({ userData }) => {
   const deleteUser = async() => {
       let status = await utils.deleteItem("http://localhost:5000/api/users" , userData._id)
       if (status.data === "deleted!") {
-        toast("The user was deleted!", { duration: 3000 })
         dispatch({ type: "DELETE_USER", payload: userData._id })
+        toast("The user was deleted!", { duration: 3000 })
+
       }
     }
 

@@ -13,7 +13,7 @@ const MoviesComp = () => {
   return (<>
 
     <div className="moviesFiltering">
-      <FormControlComp label="Find Movie" type="search" /><ButtonComp width="10%">Find</ButtonComp>
+      <FormControlComp label="Find Movie" type="search" /><ButtonComp width="10%">Find</ButtonComp>                                       
     </div>
  
     <div className="scroll-div">
@@ -21,7 +21,7 @@ const MoviesComp = () => {
       <div className="grid">
         {
           storeMovies.movies.map(movie => {
-            return <MovieComp key={movie._id} movieData={movie} />
+            return <MovieComp  movieData={movie} key={movie._id} />
           })
         }
       </div>
