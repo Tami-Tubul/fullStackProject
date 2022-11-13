@@ -25,13 +25,9 @@ const AddMovieComp = () => {
     let newMovie = movie;
     let status = await utils.addItem("http://localhost:5000/api/movies", newMovie)
 
-    if (status.data === "created!") {
+    if (status.data.message === "created!") {
 
-      let resp = await utils.getAllItems("http://localhost:5000/api/movies")
-      let allMovies = resp.data;
-      let movieID = allMovies.find(m => m.name == newMovie.name)._id
-
-      dispatch({ type: "ADD_MOVIE", payload: { ...newMovie, _id: movieID } })
+      dispatch({ type: "ADD_MOVIE", payload: { ...newMovie, _id: status.data.movieID } })
 
       toast("The movie was created!", { duration: 3000 })
 

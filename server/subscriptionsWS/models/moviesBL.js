@@ -62,7 +62,7 @@ const addMovie = (obj) => {
                 reject(err)
             }
             else {
-                resolve("created!")
+                resolve({message :"created!" , movieID: movie._id})
             }
         })
     })
