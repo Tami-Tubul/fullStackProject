@@ -5,6 +5,7 @@ import CreateAccountComp from './Components/Auth/CreateAccount';
 import LoginComp from './Components/Auth/Login';
 import MainPageComp from './Components/MainPage';
 import AddMovieComp from './Components/Movies/AddMovie';
+import EditMovieComp from './Components/Movies/EditMovie';
 import MoviesComp from './Components/Movies/Movies';
 import MoviesContainerComp from './Components/Movies/MoviesContainer';
 import SubscriptionsComp from './Components/Subscriptions/Subscriptions';

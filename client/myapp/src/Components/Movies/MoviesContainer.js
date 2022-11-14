@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import CardComp from "../../UI/Card";
 import utils from "../../Utilities/utils";
 import EditMovieComp from "./EditMovie";
@@ -46,8 +46,10 @@ const MoviesContainerComp = () => {
         </>
 
         :
+        <Routes>
+          <Route path='editMovie/:id' element={<EditMovieComp />} />
+        </Routes>
 
-        <EditMovieComp />
 
 
     }

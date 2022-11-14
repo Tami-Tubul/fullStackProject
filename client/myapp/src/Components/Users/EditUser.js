@@ -61,7 +61,7 @@ const EditUserComp = () => {
     navigate(-1)
   }
 
-  const updateFunc = async (e) => {
+  const updateUser = async (e) => {
     e.preventDefault();
     let updatedUser = user;
     let status = await utils.editItem("http://localhost:5000/api/users", params.id, updatedUser)
@@ -80,7 +80,7 @@ const EditUserComp = () => {
   return (<>
     <h3>Edit User</h3>
     <div className="scroll-div">
-      <form className="form" onSubmit={e => updateFunc(e)}>
+      <form className="form" onSubmit={e => updateUser(e)}>
         <FormGroup>
           <FormControlComp id="firstName" type="text" label="First Name:" value={user?.firstName} onChange={e => setUser({ ...user, firstName: e.target.value })} />
           <FormControlComp id="lastName" type="text" label="Last Name:" value={user?.lastName} onChange={e => setUser({ ...user, lastName: e.target.value })} />

@@ -14,15 +14,19 @@ const AddMovieComp = () => {
   const navigate = useNavigate()
 
 
-  const [movie, setMovie] = useState({ name: "", genres: [], image: "", premiered: "" })
-
-
+  const [movie, setMovie] = useState({ name: "", genres: "", image: "", premiered: "" })
 
   const addMovieFunc = async (e) => {
 
     e.preventDefault();
 
-    let newMovie = movie;
+    //convert genres string to array (without spaces)
+    let genresStr = movie.genres;
+    let genresArr = genresStr.split(",")
+    let final_genres = genresArr.map(x => x.trim())
+
+    let newMovie = {...movie, genres : final_genres};
+
     let status = await utils.addItem("http://localhost:5000/api/movies", newMovie)
 
     if (status.data.message === "created!") {
@@ -48,7 +52,7 @@ const AddMovieComp = () => {
         <form className="form" onSubmit={e => addMovieFunc(e)}>
           <FormGroup>
             <FormControlComp id="name" type="text" label="Name:" required onChange={e => setMovie({ ...movie, name: e.target.value })} />
-            <FormControlComp id="genres" type="text" label="Genres:" required onChange={e => setMovie({ ...movie, genres: [e.target.value] })} />
+            <FormControlComp id="genres" type="text" label="Genres:" required onChange={e => setMovie({ ...movie, genres: e.target.value })} />
             <FormControlComp id="image" type="text" label="Image Url:" required onChange={e => setMovie({ ...movie, image: e.target.value })} />
             <FormControlComp id="premiered" type="date" label="Premiered:" required onChange={e => setMovie({ ...movie, premiered: e.target.value })} />
 
