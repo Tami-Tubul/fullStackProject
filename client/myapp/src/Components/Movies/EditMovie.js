@@ -21,7 +21,7 @@ const EditMovieComp = () => {
   useEffect(() => {
 
     let movieForEdit = movies && movies.find(movie => movie._id === params.id)
-    const [onlyDate] = movieForEdit?.premiered?.split('T'); //set only date without hour in the date field
+    const [onlyDate] = movieForEdit?.premiered?.toString().split('T'); //set only date without hour in the date field
     setMovie({ ...movieForEdit, premiered: [onlyDate] })
 
   }, [movies, params.id])
@@ -30,15 +30,17 @@ const EditMovieComp = () => {
 
     e.preventDefault();
 
-    //convert genres string to array (without spaces)
     let genresStr = movie.genres;
-    let genresArr = genresStr.split(",")
-    let final_genres = genresArr.map(x => x.trim())
-
-    let updatedMovie = { ...movie, genres: final_genres };
+    
+    //convert genres string to array (without spaces)
+    if (!Array.isArray(movie.genres)) {
+        let genresArr = genresStr.split(",")
+        genresStr = genresArr.map(x => x.trim())
+    }
+   
+    let updatedMovie = { ...movie, genres: genresStr };
 
     let status = await utils.editItem("http://localhost:5000/api/movies", params.id, updatedMovie)
-    console.log(status.data);
     if (status.data == "updated!") {
 
       dispatch({ type: "UPDATE_MOVIE", payload: updatedMovie })
