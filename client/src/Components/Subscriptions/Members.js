@@ -9,7 +9,6 @@ const MembersComp = () => {
         <div className="scroll-div">
 
             <div className="grid">
-                <h1>MembersComp</h1>
                 {
 
                     storeSubscriptions.members.map(member => {

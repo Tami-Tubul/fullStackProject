@@ -53,7 +53,7 @@ const LoginComp = () => {
                 <h2 className="form-heading">Log in</h2>
                 <hr></hr>
                 <br />
-                <form className='form' onSubmit={e => login(e)} autoComplete="off">
+                <form className='form' onSubmit={login} autoComplete="off">
                     <FormGroup>
 
                         <FormControlComp id="userName" type="text" label="User Name" required onChange={e => setUser({ ...user, userName: e.target.value })} />

@@ -80,7 +80,7 @@ const EditUserComp = () => {
   return (<>
     <h3>Edit User</h3>
     <div className="scroll-div">
-      <form className="form" onSubmit={e => updateUser(e)}>
+      <form className="form" onSubmit={updateUser}>
         <FormGroup>
           <FormControlComp id="firstName" type="text" label="First Name:" value={user?.firstName} onChange={e => setUser({ ...user, firstName: e.target.value })} />
           <FormControlComp id="lastName" type="text" label="Last Name:" value={user?.lastName} onChange={e => setUser({ ...user, lastName: e.target.value })} />

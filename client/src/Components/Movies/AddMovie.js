@@ -49,7 +49,7 @@ const AddMovieComp = () => {
     <>
       <h3>Add Movie</h3>
       <div className="scroll-div">
-        <form className="form" onSubmit={e => addMovieFunc(e)}>
+        <form className="form" onSubmit={addMovieFunc}>
           <FormGroup>
             <FormControlComp id="name" type="text" label="Name:" required onChange={e => setMovie({ ...movie, name: e.target.value })} />
             <FormControlComp id="genres" type="text" label="Genres:" required onChange={e => setMovie({ ...movie, genres: e.target.value })} />

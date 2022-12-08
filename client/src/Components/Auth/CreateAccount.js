@@ -53,7 +53,7 @@ const CreateAccountComp = () => {
         <h2 className="form-heading">Create an Account</h2>
         <hr></hr>
         <br />
-        <form className='form' onSubmit={e => checkUser(e)} autoComplete="off">
+        <form className='form' onSubmit={checkUser} autoComplete="off">
           <FormGroup>
 
             <FormControlComp id="userName" type="text" label="User Name" required onChange={e => setUser({ ...user, userName: e.target.value })} />

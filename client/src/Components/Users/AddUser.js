@@ -78,7 +78,7 @@ const AddUserComp = () => {
   return (<>
     <h3>Add User</h3>
     <div className="scroll-div">
-      <form className="form" onSubmit={e => addUserFunc(e)}>
+      <form className="form" onSubmit={addUserFunc}>
         <FormGroup>
           <FormControlComp id="firstName" type="text" label="First Name:" required onChange={e => setUser({ ...user, firstName: e.target.value })} />
           <FormControlComp id="lastName" type="text" label="Last Name:" required onChange={e => setUser({ ...user, lastName: e.target.value })} />
