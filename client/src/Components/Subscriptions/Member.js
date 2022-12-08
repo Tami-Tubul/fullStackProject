@@ -13,7 +13,8 @@ const deleteMember = () => {
 
         <div className="content-box">
           <div className="text-box">
-            <p><strong>Email:</strong>{memberData.email}</p>
+            <h3>{memberData.name}</h3>
+            <p><strong>Email:</strong> {memberData.email}</p>
             <p><strong>City:</strong> {memberData.city}</p>
           </div>
     

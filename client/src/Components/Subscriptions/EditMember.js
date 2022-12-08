@@ -10,16 +10,25 @@ import toast from 'toast-me';
 
 const EditMemberComp = () => {
 
+  const params = useParams()
+  const navigate = useNavigate()
+  const members = useSelector(state => state.subscriptionsReducer.members)
+
+  const [member, setMember] = useState({ name: "", email: "", city: "" })
+
 
   const updateMember = (e) => {
-      e.preventDefault();
+    e.preventDefault();
   }
-  
+
   const cancelFunc = () => {
     navigate("/subscriptions/members")
   }
 
-
+  useEffect(() => {
+       let memberForEdit = members.find(member => member._id === params.id)
+       setMember(memberForEdit)
+  }, [])
 
 
   return (<>
@@ -27,10 +36,9 @@ const EditMemberComp = () => {
     <div className="scroll-div">
       <form className="form" onSubmit={updateMember}>
         <FormGroup>
-          <FormControlComp id="name" type="text" label="Name:" value={movie?.name} required onChange={e => setMovie({ ...movie, name: e.target.value })} />
-          <FormControlComp id="genres" type="text" label="Genres:" value={movie?.genres} required onChange={e => setMovie({ ...movie, genres: e.target.value })} />
-          <FormControlComp id="image" type="text" label="Image Url:" value={movie?.image} required onChange={e => setMovie({ ...movie, image: e.target.value })} />
-          <FormControlComp id="premiered" type="date" label="Premiered:" value={movie?.premiered} required onChange={e => setMovie({ ...movie, premiered: e.target.value })} />
+          <FormControlComp id="name" type="text" label="Name:" value={member?.name} required onChange={e => setMember({ ...member, name: e.target.value })} />
+          <FormControlComp id="email" type="email" label="Email:" value={member?.email} required onChange={e => setMember({ ...member, email: e.target.value })} />
+          <FormControlComp id="city" type="text" label="City:" value={member?.city} required onChange={e => setMember({ ...member, city: e.target.value })} />
 
           <br />
 
