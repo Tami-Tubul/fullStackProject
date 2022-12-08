@@ -61,7 +61,7 @@ const addMember = (obj) => {
                 reject(err)
             }
             else {
-                resolve("created!")
+                resolve({message :"created!" , memberID: member._id})
             }
         })
     })

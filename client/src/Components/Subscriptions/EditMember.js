@@ -12,13 +12,24 @@ const EditMemberComp = () => {
 
   const params = useParams()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const members = useSelector(state => state.subscriptionsReducer.members)
 
   const [member, setMember] = useState({ name: "", email: "", city: "" })
 
 
-  const updateMember = (e) => {
+  const updateMember = async (e) => {
     e.preventDefault();
+    let status = await utils.editItem("http://localhost:5000/api/members", params.id, member)
+  
+    if (status.data == "updated!") {
+     
+      dispatch({ type: "UPDATE_MEMBER", payload: member })
+    
+      toast("The member was updated!", { duration: 3000 })
+     
+      navigate("/subscriptions/members")
+    }
   }
 
   const cancelFunc = () => {
@@ -26,8 +37,8 @@ const EditMemberComp = () => {
   }
 
   useEffect(() => {
-       let memberForEdit = members.find(member => member._id === params.id)
-       setMember(memberForEdit)
+    let memberForEdit = members.find(member => member._id === params.id)
+    setMember(memberForEdit)
   }, [])
 
 
