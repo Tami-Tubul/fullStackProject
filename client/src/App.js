@@ -5,10 +5,11 @@ import CreateAccountComp from './Components/Auth/CreateAccount';
 import LoginComp from './Components/Auth/Login';
 import MainPageComp from './Components/MainPage';
 import AddMovieComp from './Components/Movies/AddMovie';
-import EditMovieComp from './Components/Movies/EditMovie';
 import MoviesComp from './Components/Movies/Movies';
 import MoviesContainerComp from './Components/Movies/MoviesContainer';
-import SubscriptionsComp from './Components/Subscriptions/Subscriptions';
+import AddMemberComp from './Components/Subscriptions/AddMember';
+import MembersComp from './Components/Subscriptions/Members';
+import SubscriptionsContainerComp from './Components/Subscriptions/SubscriptionsContainer';
 import AddUserComp from './Components/Users/AddUser';
 import EditUserComp from './Components/Users/EditUser';
 import UsersComp from './Components/Users/Users';
@@ -38,9 +39,9 @@ function App() {
             <Route path='allMovies' element={<MoviesComp />} />
             <Route path='addMovie' element={<AddMovieComp />} />
           </Route>
-          <Route path='/subscriptions' element={storeUsers?.connectedUser ? <SubscriptionsComp /> : <Navigate to="/auth/login" />}>
-            {/* <Route path='allMembers' element={<MembersComp />} />
-            <Route path='addMember' element={<AddMemberComp />} /> */}
+          <Route path='/subscriptions' element={storeUsers?.connectedUser ? <SubscriptionsContainerComp /> : <Navigate to="/auth/login" />}>
+            <Route path='members' element={<MembersComp />} />
+            <Route path='addMember' element={<AddMemberComp />} />
           </Route>
           <Route path='/usersManagement' element={storeUsers?.connectedUser ? <UsersManagementComp /> : <Navigate to="/auth/login" />} >
             <Route path='' element={<UsersContainerComp />} >

@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ButtonComp from "../../UI/Button";
-import FormControlComp from "../../UI/FormControl";
 import MovieComp from "./Movie";
 
 
@@ -16,9 +15,9 @@ const MoviesComp = () => {
     let valSearch = searchInputRef.current.value;
     let allMovies = storeMovies.movies;
     let filterMovies = allMovies.filter(movie => {
-      return (movie.name.toLowerCase().indexOf(valSearch.toLowerCase()) != -1) || 
-             (movie.genres.find(g => g.toLowerCase().indexOf(valSearch.toLowerCase()) != -1)) ||
-             (new Date(movie.premiered).getFullYear().toString().indexOf(valSearch) != -1)
+      return (movie.name.toLowerCase().indexOf(valSearch.toLowerCase()) != -1) ||
+        (movie.genres.find(g => g.toLowerCase().indexOf(valSearch.toLowerCase()) != -1)) ||
+        (new Date(movie.premiered).getFullYear().toString().indexOf(valSearch) != -1)
     })
 
     setFilteredMovies(filterMovies);
@@ -35,9 +34,13 @@ const MoviesComp = () => {
       <ButtonComp width="10%" onClick={seachMovie}>Find</ButtonComp>
 
     </div>
-    <div className="scroll-div">
-      <br />
 
+   { filteredMovies && <span style={{ color: "red" }}>{filteredMovies.length} results found</span> }
+
+    <div className="scroll-div">
+     
+      <br />
+     
       <div className="grid">
         {
           filteredMovies ?
