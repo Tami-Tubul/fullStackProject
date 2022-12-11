@@ -37,7 +37,7 @@ const AddMemberComp = () => {
       <>
          <h3>Add Member</h3>
          <div className="scroll-div">
-            <form className="form" onSubmit={addMemberFunc}>
+               <form className="form" onSubmit={addMemberFunc}>
                <FormGroup>
                   <FormControlComp id="name" type="text" label="Name:" required onChange={e => setMember({ ...member, name: e.target.value })} />
                   <FormControlComp id="email" type="email" label="Email:" required onChange={e => setMember({ ...member, email: e.target.value })} />

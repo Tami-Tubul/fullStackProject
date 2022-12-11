@@ -20,7 +20,7 @@ const UserComp = ({ userData }) => {
 
 
   return (
-
+  
     <div className="content-box">
       <div className="text-box">
         <p><strong>Name:</strong>  {userData.firstName} {userData.lastName}</p>
@@ -33,8 +33,7 @@ const UserComp = ({ userData }) => {
         <ButtonComp type="button" width="20%" height="27px" onClick={() => navigate("/usersManagement/editUser/" + userData._id)}>Edit</ButtonComp>{" "}
         <ButtonComp type="button" width="20%" height="27px" onClick={deleteUser} >Delete</ButtonComp>
       </div>
-    </div>
-
+    </div> 
 
   )
 }

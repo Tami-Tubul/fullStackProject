@@ -1,17 +1,21 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { NavLink, Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import CardComp from "../../UI/Card";
 import utils from "../../Utilities/utils";
 import EditMovieComp from "./EditMovie";
 
 const MoviesContainerComp = () => {
 
+  const navigate = useNavigate()
+
   const dispatch = useDispatch()
 
   const url = useLocation().pathname
 
   useEffect(() => {
+
+   navigate("/movies/allMovies") // active the all movies tab
 
     //load users
     const getAllMovies = async () => {
@@ -32,7 +36,7 @@ const MoviesContainerComp = () => {
         <>
           <nav>
             <ul>
-              <li><NavLink to="allMovies" className={navData => navData.isActive ? "active" : ''}>All Movies</NavLink></li>
+              <li><NavLink to="allMovies" className={ navData => navData.isActive ? "active" : ''}>All Movies</NavLink></li>
               <li><NavLink to="addMovie" className={navData => navData.isActive ? "active" : ''}>Add Movie</NavLink></li>
             </ul>
           </nav>
