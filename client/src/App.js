@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import CreateAccountComp from './Components/Auth/CreateAccount';
@@ -16,15 +17,40 @@ import UsersComp from './Components/Users/Users';
 import UsersContainerComp from './Components/Users/UsersContainer';
 import UsersManagementComp from './Components/Users/UsersManagement';
 import HeaderComp from './Layouts/Header';
-
-
+import utils from './Utilities/utils';
 
 
 function App() {
 
   const storeUsers = useSelector(state => state.usersReducer)
 
+  const dispatch = useDispatch()
 
+    useEffect(() => {
+
+        //load users
+        const getAllUsers = async () => {
+            const resp = await utils.getAllItems("http://localhost:5000/api/users")
+            dispatch({ type: "LOAD_USERS", payload: resp.data })
+        }
+
+        //load movies
+        const getAllMovies = async () => {
+            const resp = await utils.getAllItems("http://localhost:5000/api/movies")
+            dispatch({ type: "LOAD_MOVIES", payload: resp.data })
+        }
+
+        //load members
+        const getAllMembers = async () => {
+            const resp = await utils.getAllItems("http://localhost:5000/api/members")
+            dispatch({ type: "LOAD_MEMBERS", payload: resp.data })
+        }
+
+        getAllUsers();
+        getAllMovies();
+        getAllMembers();
+
+    }, [])
 
   return (
     <div className='App'>

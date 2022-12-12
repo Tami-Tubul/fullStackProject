@@ -1,15 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { NavLink, Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import CardComp from "../../UI/Card";
-import utils from "../../Utilities/utils";
 import EditMovieComp from "./EditMovie";
 
 const MoviesContainerComp = () => {
 
   const navigate = useNavigate()
-
-  const dispatch = useDispatch()
 
   const url = useLocation().pathname
 
@@ -17,14 +13,7 @@ const MoviesContainerComp = () => {
 
    navigate("/movies/allMovies") // active the all movies tab
 
-    //load users
-    const getAllMovies = async () => {
-      const resp = await utils.getAllItems("http://localhost:5000/api/movies")
-      dispatch({ type: "LOAD_MOVIES", payload: resp.data })
-    }
-    getAllMovies()
-
-  }, [dispatch])
+  }, [])
 
 
   return (<CardComp width="60%">

@@ -1,26 +1,33 @@
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ButtonComp from "../../UI/Button";
 import MovieComp from "./Movie";
 
 
 const MoviesComp = () => {
 
-  const storeMovies = useSelector(state => state.moviesReducer)
+  const [valSearch , setValSearch] = useState()
 
-  const [filteredMovies, setFilteredMovies] = useState()
+  const storeMovies = useSelector(state => state.moviesReducer)
+  const dispatch = useDispatch()
+
   const searchInputRef = useRef()
 
   const seachMovie = () => {
-    let valSearch = searchInputRef.current.value;
-    let allMovies = storeMovies.movies;
-    let filterMovies = allMovies.filter(movie => {
-      return (movie.name.toLowerCase().indexOf(valSearch.toLowerCase()) != -1) ||
-        (movie.genres.find(g => g.toLowerCase().indexOf(valSearch.toLowerCase()) != -1)) ||
-        (new Date(movie.premiered).getFullYear().toString().indexOf(valSearch) != -1)
-    })
+   
+    let valsearch = searchInputRef.current.value;
+    setValSearch(valsearch) // save on state for check if field was fill or not
 
-    setFilteredMovies(filterMovies);
+    if (valsearch) {
+      let allMovies = storeMovies.movies;
+      let filterMovies = allMovies.filter(movie => {
+        return (movie.name.toLowerCase().indexOf(valsearch.toLowerCase()) != -1) ||
+          (movie.genres.find(g => g.toLowerCase().indexOf(valsearch.toLowerCase()) != -1)) ||
+          (new Date(movie.premiered).getFullYear().toString().indexOf(valsearch) != -1)
+      })
+
+      dispatch({ type: "FILTERED_MOVIES", payload: filterMovies })
+    }
   }
 
 
@@ -28,23 +35,22 @@ const MoviesComp = () => {
 
     <div className="moviesFiltering">
 
-      {/* <FormControlComp label="Find Movie" type="search" ref={searchInputRef} /> */}
-
       <input type="search" placeholder="Find Movie" ref={searchInputRef} />
       <ButtonComp width="10%" onClick={seachMovie}>Find</ButtonComp>
 
     </div>
 
-   { filteredMovies && <span style={{ color: "red" }}>{filteredMovies.length} results found</span> }
+    {valSearch && <span style={{ color: "red" }}>{storeMovies.filteredMovies.length} results found</span>}
 
     <div className="scroll-div">
-     
+
       <br />
-     
+
       <div className="grid">
         {
-          filteredMovies ?
-            filteredMovies.map(movie => {
+
+          valSearch ?
+            storeMovies.filteredMovies.map(movie => {
               return <MovieComp movieData={movie} key={movie._id} />
             })
             :
