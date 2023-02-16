@@ -2,7 +2,7 @@ import CardComp from "../../UI/Card";
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 
-import { FormGroup } from '@material-ui/core';
+import { FormGroup } from "@mui/material";
 
 import AlertComp from '../../UI/Alert';
 import ButtonComp from '../../UI/Button';

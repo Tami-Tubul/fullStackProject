@@ -3,12 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import utils from '../../Utilities/utils';
 
-import { FormGroup } from '@material-ui/core';
 import toast from 'toast-me';
 import AlertComp from '../../UI/Alert';
 import ButtonComp from '../../UI/Button';
 import FormControlComp from '../../UI/FormControl';
 import './Auth.css';
+import { FormGroup } from "@mui/material";
 
 
 const CreateAccountComp = () => {

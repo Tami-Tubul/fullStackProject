@@ -1,4 +1,4 @@
-import { Input, FormLabel, FormControl, TextField } from '@material-ui/core';
+import { Input, FormLabel, FormControl, TextField } from "@mui/material";
 
 const FormControlComp = (props) => {
     return (
