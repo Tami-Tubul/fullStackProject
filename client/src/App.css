@@ -15,9 +15,10 @@ h1 {
   color: white ;
 }
 
-h2,h3 {
+h2,h3,h4,h5{
   color: #2E1C98;
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

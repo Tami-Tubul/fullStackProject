@@ -58,7 +58,7 @@
   .subscribe-border{
     border: 2px solid #2f1c98c5; 
     border-radius: 15px;
-    width: max-content;
     margin: 10px;
     padding: 10px;
   }
+

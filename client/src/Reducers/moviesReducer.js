@@ -1,4 +1,4 @@
-function moviesReducer(state = { movies: []  , filteredMovies: [] }, action) {
+function moviesReducer(state = { movies: [], filteredMovies: [] , subscibeMovie: {} }, action) {
 
     switch (action.type) {
 
@@ -6,7 +6,10 @@ function moviesReducer(state = { movies: []  , filteredMovies: [] }, action) {
             return { ...state, movies: action.payload }
 
         case "FILTERED_MOVIES":
-            return { ...state, filteredMovies: action.payload }
+            return { ...state, filteredMovies: action.payload}
+
+        case "SUBSCRIBE_MOVIE":
+            return { ...state, subscibeMovie: action.payload }
 
         case "ADD_MOVIE":
             return { ...state, movies: [...state.movies, action.payload] }
@@ -22,7 +25,7 @@ function moviesReducer(state = { movies: []  , filteredMovies: [] }, action) {
 
         case "DELETE_MOVIE":
             let d_id = action.payload;
-            
+
             let d_arr = [...state.movies]
             let d_arrFilter = [...state.filteredMovies]
 
@@ -36,7 +39,7 @@ function moviesReducer(state = { movies: []  , filteredMovies: [] }, action) {
                 d_arrFilter.splice(d_indexfilter, 1)
             }
 
-            return { ...state, movies: d_arr , filteredMovies: d_arrFilter}
+            return { ...state, movies: d_arr, filteredMovies: d_arrFilter }
 
 
         default:

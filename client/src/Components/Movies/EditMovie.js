@@ -19,7 +19,6 @@ const EditMovieComp = () => {
 
 
   useEffect(() => {
-
     let movieForEdit = movies && movies.find(movie => movie._id === params.id)
     const [onlyDate] = movieForEdit?.premiered?.toString().split('T'); //set only date without hour in the date field
     setMovie({ ...movieForEdit, premiered: [onlyDate] })
@@ -31,13 +30,13 @@ const EditMovieComp = () => {
     e.preventDefault();
 
     let genresStr = movie.genres;
-    
+
     //convert genres string to array (without spaces)
     if (!Array.isArray(movie.genres)) {
-        let genresArr = genresStr.split(",")
-        genresStr = genresArr.map(x => x.trim())
+      let genresArr = genresStr.split(",")
+      genresStr = genresArr.map(x => x.trim())
     }
-   
+
     let updatedMovie = { ...movie, genres: genresStr };
 
     let status = await utils.editItem("http://localhost:5000/api/movies", params.id, updatedMovie)
@@ -53,7 +52,7 @@ const EditMovieComp = () => {
   }
 
   const cancelFunc = () => {
-    navigate("/movies/allMovies")
+     navigate(-1)
   }
 
 

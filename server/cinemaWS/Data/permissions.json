@@ -1,1 +1,33 @@
-{"permissions":[{"_id":"6356a8cbc7ae1936399ae810","permissions":["View Subscriptions","Create Subscriptions","Delete Subscriptions","Update Subscriptions","View Movies","Create Movies","Delete Movies","Update Movies"]},{"_id":"6356a8f4c7ae1936399ae811","permissions":["View Subscriptions","Create Subscriptions","Delete Subscriptions"]},{"_id":"6356a926c7ae1936399ae812","permissions":["Update Subscriptions","View Movies","Update Movies"]}]}
+{
+    "permissions": [
+        {
+            "_id": "63ee371969db2047146e45b1",
+            "permissions": [
+                "View Subscriptions",
+                "Create Subscriptions",
+                "Delete Subscriptions",
+                "Update Subscriptions",
+                "View Movies",
+                "Create Movies",
+                "Delete Movies",
+                "Update Movies"
+            ]
+        },
+        {
+            "_id": "6356a8f4c7ae1936399ae811",
+            "permissions": [
+                "View Subscriptions",
+                "Create Subscriptions",
+                "Delete Subscriptions"
+            ]
+        },
+        {
+            "_id": "6356a926c7ae1936399ae812",
+            "permissions": [
+                "Update Subscriptions",
+                "View Movies",
+                "Update Movies"
+            ]
+        }
+    ]
+}

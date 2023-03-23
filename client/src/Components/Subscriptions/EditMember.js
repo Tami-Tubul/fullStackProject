@@ -33,7 +33,7 @@ const EditMemberComp = () => {
   }
 
   const cancelFunc = () => {
-    navigate("/subscriptions/members")
+      navigate(-1)
   }
 
   useEffect(() => {

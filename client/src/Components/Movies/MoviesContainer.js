@@ -7,11 +7,13 @@ const MoviesContainerComp = () => {
 
   const navigate = useNavigate()
 
-  const url = useLocation().pathname
+  const { pathname ,state} = useLocation();
 
   useEffect(() => {
 
-   navigate("/movies/allMovies") // active the all movies tab
+    if (!pathname.match(/\d/) && state?.previousPath !== "/subscriptions/members" ) {
+         navigate("/movies/allMovies") // active the 'all movies' tab
+    }
 
   }, [])
 
@@ -21,11 +23,12 @@ const MoviesContainerComp = () => {
     <hr></hr>
 
     {
-      !url.includes("editMovie") ?
+      //!url.includes("editMovie") ?
+      !pathname.match(/\d/) ?
         <>
           <nav>
             <ul>
-              <li><NavLink to="allMovies" className={ navData => navData.isActive ? "active" : ''}>All Movies</NavLink></li>
+              <li><NavLink to="allMovies" className={navData => navData.isActive ? "active" : ''}>All Movies</NavLink></li>
               <li><NavLink to="addMovie" className={navData => navData.isActive ? "active" : ''}>Add Movie</NavLink></li>
             </ul>
           </nav>
@@ -37,8 +40,6 @@ const MoviesContainerComp = () => {
         <Routes>
           <Route path='editMovie/:id' element={<EditMovieComp />} />
         </Routes>
-
-
 
     }
   </CardComp>

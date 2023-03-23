@@ -1,20 +1,24 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import ButtonComp from "../../UI/Button";
 import MovieComp from "./Movie";
 
 
 const MoviesComp = () => {
 
-  const [valSearch , setValSearch] = useState()
+  const [valSearch, setValSearch] = useState()
 
   const storeMovies = useSelector(state => state.moviesReducer)
   const dispatch = useDispatch()
+  const { state } = useLocation();
+
+  console.log(state?.previousPath);
 
   const searchInputRef = useRef()
 
-  const seachMovie = () => {
-   
+  const searchMovie = () => {
+
     let valsearch = searchInputRef.current.value;
     setValSearch(valsearch) // save on state for check if field was fill or not
 
@@ -36,7 +40,7 @@ const MoviesComp = () => {
     <div className="moviesFiltering">
 
       <input type="search" placeholder="Find Movie" ref={searchInputRef} />
-      <ButtonComp width="10%" onClick={seachMovie}>Find</ButtonComp>
+      <ButtonComp width="10%" onClick={searchMovie}>Find</ButtonComp>
 
     </div>
 
@@ -54,9 +58,13 @@ const MoviesComp = () => {
               return <MovieComp movieData={movie} key={movie._id} />
             })
             :
+            !valSearch && state?.previousPath == "/subscriptions/members" ?
+              <MovieComp movieData={storeMovies.subscibeMovie} />
+            :
             storeMovies.movies.map(movie => {
               return <MovieComp movieData={movie} key={movie._id} />
             })
+
         }
 
       </div>

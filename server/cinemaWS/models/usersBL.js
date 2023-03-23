@@ -8,7 +8,7 @@ const getAllUsers = async () => {
     let usersPermissions = await permissionsDal.getPermissions()
     let usersDataFromMongo = await usersMongo.getUsersFromMongo()
     let fullUsersData = allUsers.map(x => {
-        return { _id: x._id, firstName: x.firstName, lastName: x.lastName, userName: usersDataFromMongo.find(y => y._id == x._id).userName, password: usersDataFromMongo.find(y => y._id == x._id).password, createdDate: x.createdDate, sessionTimeOut: x.sessionTimeOut, permissions: usersPermissions.find(y => y._id == x._id).permissions }
+        return { _id: x._id, firstName: x.firstName, lastName: x.lastName, userName: usersDataFromMongo.find(y => y._id == x._id)?.userName, password: usersDataFromMongo.find(y => y._id == x._id)?.password, createdDate: x.createdDate, sessionTimeOut: x.sessionTimeOut, permissions: usersPermissions.find(y => y._id == x._id).permissions }
     })
 
     return fullUsersData;
