@@ -1,6 +1,6 @@
 const usersDal = require("../DALs/usersFileDAL")
 const permissionsDal = require("../DALs/permissionsFileDAL")
-const usersMongo = require("./usersMongo")
+const usersMongo = require("../DALs/usersMongo")
 const date = require("../reusableCode/calculateDate")
 
 const getAllUsers = async () => {

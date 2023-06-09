@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 
-const subscriptionsBL = require("../models/subscriptionsBL");
+const subscriptionsBL = require("../BL/subscriptionsBL");
 
 router.get("/", async function (req, resp) {
    let allMembers = await subscriptionsBL.getAllSubscriptions();

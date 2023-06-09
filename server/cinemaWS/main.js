@@ -19,9 +19,18 @@ app.use("/api/members", membersRouter)
 app.use("/api/movies", moviesRouter)
 app.use("/api/subscriptions", subscriptionsRouter)
 
+app.use((err, req, res, next) => {
+    res.status(500).json({
+        message: err.message,
+        stack: err.stack
+    })
+})
 
 require("./configs/database")
 
-app.listen(5000)
-console.log("Cinema server is running...")
+const PORT = 5000;
+app.listen(PORT, () => {
+    console.log(`Cinema server is running in port ${PORT}`);
+})
+
 

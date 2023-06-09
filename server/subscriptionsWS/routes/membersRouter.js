@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 
-const membersBL = require("../models/membersBL");
+const membersBL = require("../BL/membersBL");
 
 router.get("/", async function (req, resp) {
    let allMembers = await membersBL.getAllMemebers();

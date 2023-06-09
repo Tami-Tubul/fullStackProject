@@ -1,5 +1,5 @@
 const membersWS_Dal = require("../DALs/membersWS_DAL");
-const membersModel = require("../DALs/membersModel");
+const membersModel = require("../models/membersModel");
 
 const loadMembersToMongoDB = async () => {
     membersModel.count(async function (err, count) {

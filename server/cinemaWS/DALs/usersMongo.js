@@ -1,4 +1,4 @@
-const usersModel = require("../DALs/usersModel")
+const usersModel = require("../models/usersModel")
 
 const getUsersFromMongo = () => {
     return new Promise((resolve, reject) => {

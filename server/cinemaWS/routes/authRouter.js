@@ -3,38 +3,40 @@ const router = express.Router()
 
 const jwt = require("jsonwebtoken")
 
-const usersBL = require("../models/usersBL")
+const usersBL = require("../BL/usersBL")
 
-router.post("/login", async function (req, resp) {
+router.post("/login", async function (req, resp, next) {
+    try {
+        let userName = req.body.userName;
+        let password = req.body.password;
 
-    let userName = req.body.userName;
-    let password = req.body.password;
-    
-    let allUsers = await usersBL.getAllUsers()
-    let userData = allUsers.find(user => user.userName == userName && user.password == password)
-    
-    if(!userData){
-        resp.status(401).send({ message: "Incorrect login information" })
+        let allUsers = await usersBL.getAllUsers()
+        let userData = allUsers.find(user => user.userName == userName && user.password == password)
+
+        if (!userData) {
+            resp.status(401).send({ message: "Incorrect login information" })
+        }
+
+        else {
+
+            const userID = userData._id;
+            const RSA_PRIVATE_KEY = "somekey"
+
+            const tokenData = jwt.sign(
+                { id: userID },
+                RSA_PRIVATE_KEY,
+                { expiresIn: userData.sessionTimeOut }
+            )
+
+            resp.status(200).send({ token: tokenData, connectedUser: userData })
+
+        }
+    } catch (error) {
+        next(error)
     }
-    
-    else{
 
-        const userID = userData._id;
-        const RSA_PRIVATE_KEY = "somekey"
-
-        const tokenData = jwt.sign(
-            { id: userID },
-            RSA_PRIVATE_KEY,
-            { expiresIn: userData.sessionTimeOut }
-        )
-
-         resp.status(200).send({ token: tokenData, connectedUser: userData })
-
-    }
-    
 
 })
-
 
 // router.get("/", async function (req, resp) {
 

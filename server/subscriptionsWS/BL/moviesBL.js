@@ -1,5 +1,5 @@
 const moviesWS_Dal = require("../DALs/moviesWS_DAL");
-const moviesModel = require("../DALs/moviesModel")
+const moviesModel = require("../models/moviesModel")
 
 const loadMoviesToMongoDB = async () => {
     moviesModel.count(async function (err, count) {

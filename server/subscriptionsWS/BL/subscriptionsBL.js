@@ -1,4 +1,4 @@
-const subscriptionsModel = require("../DALs/subscriptionsModel")
+const subscriptionsModel = require("../models/subscriptionsModel")
 
 const getAllSubscriptions = () => {
     return new Promise((resolve, reject) => {

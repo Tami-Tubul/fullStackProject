@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 
-const moviesBL = require("../models/moviesBL");
+const moviesBL = require("../BL/moviesBL");
 
 router.get("/", async function (req, resp) {
    let allMembers = await moviesBL.getAllMovies();
