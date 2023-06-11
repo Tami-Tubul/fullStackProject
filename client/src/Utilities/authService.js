@@ -1,11 +1,7 @@
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
-
-
 
 const login = (userName, password) => {
     return axios.post("http://localhost:5000/api/auth/login", { userName: userName, password: password })
-
 }
 
 const saveToken = (token) => {
@@ -13,8 +9,7 @@ const saveToken = (token) => {
 }
 
 const saveUser = (user) => {
-    sessionStorage["user"] = user;
-
+    sessionStorage["user"] = JSON.stringify(user);
 }
 
 const getToken = () => {
@@ -22,7 +17,7 @@ const getToken = () => {
 }
 
 const getUser = () => {
-    return sessionStorage["user"]
+    return sessionStorage["user"] && JSON.parse(sessionStorage["user"]);
 }
 
 

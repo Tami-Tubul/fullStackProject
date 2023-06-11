@@ -13,7 +13,7 @@ const MoviesComp = () => {
   const dispatch = useDispatch()
   const { state } = useLocation();
 
-  console.log(state?.previousPath);
+  //console.log(state?.previousPath);
 
   const searchInputRef = useRef()
 

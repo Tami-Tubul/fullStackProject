@@ -33,7 +33,7 @@ const LoginComp = () => {
                     authService.saveToken(token);
 
                     let connectedUser = resp.data.connectedUser;
-                    authService.saveUser(connectedUser)
+                    authService.saveUser(connectedUser);
 
                     dispatch({ type: "CONNECTED_USER", payload: connectedUser })
 

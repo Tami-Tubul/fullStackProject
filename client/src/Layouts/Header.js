@@ -22,13 +22,14 @@ const HeaderComp = (props) => {
         <>
             <header>
                 <h1>Cinema Website</h1>
-                {storeUsers.connectedUser && <>
-                    <NavComp uname={props.uname} />
-                    <span className="user-name">
-                        <i>Hello {props.fname} {props.lname}</i>
-                        <img className="door-icon" src={doorIcon} width="50" onClick={logOut} />
-                    </span>
-                </>}
+                {storeUsers.connectedUser &&
+                    <>
+                        <NavComp isAdmin={props.isAdmin} />
+                        <span className="user-name">
+                            <i>Hello {props.fname} {props.lname}</i>
+                            <img className="door-icon" src={doorIcon} width="50" onClick={logOut} />
+                        </span>
+                    </>}
 
             </header>
             <div className='flat-line'></div>

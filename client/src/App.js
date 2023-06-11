@@ -54,7 +54,7 @@ function App() {
 
   return (
     <div className='App'>
-      <HeaderComp uname={storeUsers?.connectedUser?.userName} fname={storeUsers?.connectedUser?.firstName} lname={storeUsers?.connectedUser?.lastName} />
+      <HeaderComp isAdmin={storeUsers?.connectedUser?.isAdmin} fname={storeUsers?.connectedUser?.firstName} lname={storeUsers?.connectedUser?.lastName} />
       <main>
 
         <Routes>

@@ -20,8 +20,8 @@ const EditMovieComp = () => {
 
   useEffect(() => {
     let movieForEdit = movies && movies.find(movie => movie._id === params.id)
-    const [onlyDate] = movieForEdit?.premiered?.toString().split('T'); //set only date without hour in the date field
-    setMovie({ ...movieForEdit, premiered: [onlyDate] })
+    const onlyDate = movieForEdit?.premiered?.toString().split('T')[0]; //set only date without hour in the date field
+    setMovie({ ...movieForEdit, premiered: onlyDate })
   }, [movies, params.id])
 
   const updateMovie = async (e) => {
@@ -39,7 +39,7 @@ const EditMovieComp = () => {
     let updatedMovie = { ...movie, genres: genresStr };
 
     let status = await utils.editItem("http://localhost:5000/api/movies", params.id, updatedMovie)
-    if (status.data == "updated!") {
+    if (status.data === "updated!") {
 
       dispatch({ type: "UPDATE_MOVIE", payload: updatedMovie })
 

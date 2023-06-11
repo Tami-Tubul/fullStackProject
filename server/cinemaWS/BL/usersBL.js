@@ -8,7 +8,16 @@ const getAllUsers = async () => {
     let usersPermissions = await permissionsDal.getPermissions()
     let usersDataFromMongo = await usersMongo.getUsersFromMongo()
     let fullUsersData = allUsers.map(x => {
-        return { _id: x._id, firstName: x.firstName, lastName: x.lastName, userName: usersDataFromMongo.find(y => y._id == x._id)?.userName, password: usersDataFromMongo.find(y => y._id == x._id)?.password, createdDate: x.createdDate, sessionTimeOut: x.sessionTimeOut, permissions: usersPermissions.find(y => y._id == x._id).permissions }
+        return {
+            _id: x._id, firstName: x.firstName,
+            lastName: x.lastName,
+            userName: usersDataFromMongo.find(y => y._id == x._id)?.userName,
+            password: usersDataFromMongo.find(y => y._id == x._id)?.password,
+            isAdmin: usersDataFromMongo.find(y => y._id == x._id)?.isAdmin,
+            createdDate: x.createdDate,
+            sessionTimeOut: x.sessionTimeOut,
+            permissions: usersPermissions.find(y => y._id == x._id).permissions
+        }
     })
 
     return fullUsersData;
@@ -25,7 +34,17 @@ const getUserByID = async (id) => {
     let usersDataFromMongo = await usersMongo.getUsersFromMongo()
     let userDataFromMongo = usersDataFromMongo.find(y => y._id == id)
 
-    let fullUserData = { _id: user._id, firstName: user.firstName, lastName: user.lastName, userName: userDataFromMongo.userName, password: userDataFromMongo.password, createdDate: user.createdDate, sessionTimeOut: user.sessionTimeOut, permissions: userPermissions.permissions }
+    let fullUserData = {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        userName: userDataFromMongo.userName,
+        password: userDataFromMongo.password,
+        isAdmin: userDataFromMongo.isAdmin,
+        createdDate: user.createdDate,
+        sessionTimeOut: user.sessionTimeOut,
+        permissions: userPermissions.permissions
+    }
 
     return fullUserData;
 }
