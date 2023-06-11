@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import authService from "../Utilities/authService";
 
-const HeaderComp = (props) => {
-
+const HeaderComp = ({connectedUserData}) => {
+console.log(connectedUserData);
     const navigate = useNavigate()
-    const storeUsers = useSelector(state => state.usersReducer)
+    const connectedUser = useSelector(state => state.usersReducer.connectedUser)
     const dispatch = useDispatch()
 
 
@@ -20,16 +20,15 @@ const HeaderComp = (props) => {
 
     return (
         <>
-            <header>
+            <header></header>
                 <h1>Cinema Website</h1>
-                {storeUsers.connectedUser &&
-                    <>
-                        <NavComp isAdmin={props.isAdmin} />
-                        <span className="user-name">
-                            <i>Hello {props.fname} {props.lname}</i>
-                            <img className="door-icon" src={doorIcon} width="50" onClick={logOut} />
-                        </span>
-                    </>}
+                {connectedUser && <>
+                    <NavComp isAdmin={connectedUserData.isAdmin} />
+                    <span className="user-name">
+                        <i>Hello {connectedUserData.firstName} {connectedUserData.lastName}</i>
+                        <img className="door-icon" src={doorIcon} width="50" onClick={logOut} title="Log out"/>
+                    </span>
+                </>}
 
             </header>
             <div className='flat-line'></div>
