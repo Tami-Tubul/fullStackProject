@@ -50,9 +50,8 @@ const getUserByID = async (id) => {
 }
 
 const addUser = async (obj) => {
-    let newUserName = { userName: obj.userName, password: "" }
+    let newUserName = { userName: obj.userName, password: "123456789" } // The admin set a default password until the user will change it
     let status = await usersMongo.addUserToMongo(newUserName)
-
     if (status == "created!") {
 
         let allUsersFromMongo = await usersMongo.getUsersFromMongo()
@@ -60,13 +59,15 @@ const addUser = async (obj) => {
 
         let newUser = { _id: newUserID, firstName: obj.firstName, lastName: obj.lastName, createdDate: date.todayDate(), sessionTimeOut: obj.sessionTimeOut }
         let allUsers = await usersDal.getUsers()
-        allUsers.push(newUser)
-        let statusUsers = await usersDal.saveUsers({ "users": allUsers })
+        let users = [...allUsers, newUser]
+        // allUsers.push(newUser)
+        let statusUsers = await usersDal.saveUsers({ "users": users })
 
         let newPermissions = { _id: newUserID, permissions: obj.permissions }
         let allPermissions = await permissionsDal.getPermissions()
-        allPermissions.push(newPermissions)
-        let statusPermissions = await permissionsDal.savePermissions({ "permissions": allPermissions })
+       // allPermissions.push(newPermissions)
+        let permissions = [...allPermissions,newPermissions]
+        let statusPermissions = await permissionsDal.savePermissions({ "permissions": permissions })
 
         if (statusUsers && statusPermissions == "Done!")
             return { status: status, userId: newUserID, createdDate: newUser.createdDate };

@@ -49,7 +49,7 @@ const AddUserComp = () => {
 
   }
 
-  
+
 
   const cancelFunc = () => {
     navigate("/usersManagement/users");
@@ -60,17 +60,17 @@ const AddUserComp = () => {
     let newUser = user;
     let status = await utils.addItem("http://localhost:5000/api/users", newUser)
 
-    if (status.data.status == "created!") {
+      if (status.data.status === "created!") {
 
-      let newUserID = status.data.userId; // get the userId from database
-      let createdDate = status.data.createdDate; // get the createdDate from database
+        let newUserID = status.data.userId; // get the userId from database
+        let createdDate = status.data.createdDate; // get the createdDate from database
 
-      toast("The user was created!", { duration: 3000 })
+        toast("The user was created!", { duration: 3000 })
 
-      dispatch({ type: "ADD_USER", payload: { ...newUser, _id: newUserID, createdDate: createdDate } });
+        dispatch({ type: "ADD_USER", payload: { ...newUser, _id: newUserID, createdDate: createdDate } });
 
-      navigate("/usersManagement/users");
-    }
+        navigate("/usersManagement/users");
+      }
   }
 
 
@@ -86,7 +86,7 @@ const AddUserComp = () => {
           <FormControlComp id="sessionTimeOut" type="number" label="Session Time Out (Minutes):" required onChange={e => setUser({ ...user, sessionTimeOut: e.target.value })} />
 
 
-          <FormControl style={{ width:"77%", display:"inline-block", margin:"auto"}} component="fieldset" variant="standard">
+          <FormControl style={{ width: "77%", display: "inline-block", margin: "auto" }} component="fieldset" variant="standard">
             <FormLabel component="legend">permissions:</FormLabel>
             {
               permissionsArr.map((per, index) => {

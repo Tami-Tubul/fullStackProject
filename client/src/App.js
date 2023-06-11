@@ -22,7 +22,7 @@ import utils from './Utilities/utils';
 
 function App() {
 
-  const storeUsers = useSelector(state => state.usersReducer)
+  const connectedUser = useSelector(state => state.usersReducer.connectedUser)
 
   const dispatch = useDispatch()
 
@@ -54,22 +54,22 @@ function App() {
 
   return (
     <div className='App'>
-      <HeaderComp isAdmin={storeUsers?.connectedUser?.isAdmin} fname={storeUsers?.connectedUser?.firstName} lname={storeUsers?.connectedUser?.lastName} />
+      <HeaderComp connectedUserData={connectedUser} />
       <main>
 
         <Routes>
           <Route path='/auth/login' element={<LoginComp />} />
           <Route path='/createAccount' element={<CreateAccountComp />} />
-          <Route path='/' element={storeUsers?.connectedUser ? <MainPageComp /> : <Navigate to="/auth/login" />} />
-          <Route path='/movies/*' element={storeUsers?.connectedUser ? <MoviesContainerComp /> : <Navigate to="/auth/login" />} >
+          <Route path='/' element={connectedUser ? <MainPageComp /> : <Navigate to="/auth/login" />} />
+          <Route path='/movies/*' element={connectedUser ? <MoviesContainerComp /> : <Navigate to="/auth/login" />} >
             <Route path='allMovies' element={<MoviesComp />} />
             <Route path='addMovie' element={<AddMovieComp />} />
           </Route>
-          <Route path='/subscriptions/*' element={storeUsers?.connectedUser ? <SubscriptionsContainerComp /> : <Navigate to="/auth/login" />}>
+          <Route path='/subscriptions/*' element={connectedUser ? <SubscriptionsContainerComp /> : <Navigate to="/auth/login" />}>
             <Route path='members' element={<MembersComp />} />
             <Route path='addMember' element={<AddMemberComp />} />
           </Route>
-          <Route path='/usersManagement' element={storeUsers?.connectedUser ? <UsersManagementComp /> : <Navigate to="/auth/login" />} >
+          <Route path='/usersManagement' element={connectedUser ? <UsersManagementComp /> : <Navigate to="/auth/login" />} >
             <Route path='' element={<UsersContainerComp />} >
               <Route path='users' element={<UsersComp />} />
               <Route path='addUser' element={<AddUserComp />} />
