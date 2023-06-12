@@ -5,6 +5,8 @@ import EditMemberComp from "./EditMember";
 
 const SubscriptionsContainerComp = () => {
 
+
+
   const navigate = useNavigate()
 
   const url = useLocation().pathname;
@@ -13,7 +15,7 @@ const SubscriptionsContainerComp = () => {
 
     navigate("/subscriptions/members") // active the all members tab
 
-  },[])
+  }, [])
 
 
   return (
@@ -23,21 +25,21 @@ const SubscriptionsContainerComp = () => {
       <hr></hr>
       {
         !url.includes("editMember") ?
-        <>
-          <nav>
-            <ul>
-              <li><NavLink to="members" className={navData => navData.isActive ? "active" : ''}>All Members</NavLink></li>
-              <li><NavLink to="addMember" className={navData => navData.isActive ? "active" : ''}>Add Member</NavLink></li>
-            </ul>
-          </nav>
- 
-          <Outlet />
-      </>
-      :
+          <>
+            <nav>
+              <ul>
+                <li><NavLink to="members" className={navData => navData.isActive ? "active" : ''}>All Members</NavLink></li>
+                  <li><NavLink to="addMember" className={navData => navData.isActive ? "active" : ''}>Add Member</NavLink></li>
+              </ul>
+            </nav>
 
-      <Routes>
-        <Route path="editMember/:id" element={<EditMemberComp/>}></Route>
-      </Routes>
+            <Outlet />
+          </>
+          :
+
+          <Routes>
+            <Route path="editMember/:id" element={<EditMemberComp />}></Route>
+          </Routes>
       }
 
     </CardComp >

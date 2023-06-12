@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import utils from "../../Utilities/utils"
 import toast from 'toast-me';
@@ -7,15 +7,19 @@ import ButtonComp from "../../UI/Button";
 
 const MovieComp = ({ movieData }) => {
 
+  const permissions = useSelector(state => state.usersReducer.connectedUser.permissions)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const deleteMovie = async () => {
-          let status = await utils.deleteItem("http://localhost:5000/api/movies", movieData._id)
-          if (status.data === "deleted!") {
-              dispatch({ type: "DELETE_MOVIE", payload: movieData._id })
-              toast("The movie was deleted!", { duration: 3000 })
-          }
+    if (window.confirm("Are you sure?")) {
+      let status = await utils.deleteItem("http://localhost:5000/api/movies", movieData._id)
+      if (status.data === "deleted!") {
+        dispatch({ type: "DELETE_MOVIE", payload: movieData._id })
+        toast("The movie was deleted!", { duration: 3000 })
+      }
+    }
   }
 
   return (
@@ -28,8 +32,12 @@ const MovieComp = ({ movieData }) => {
       </div>
 
       <div className="actions-box">
-        <ButtonComp type="button" width="20%" height="27px" onClick={() => navigate("/movies/editMovie/" + movieData._id)}>Edit</ButtonComp>{" "}
-        <ButtonComp type="button" width="20%" height="27px" onClick={deleteMovie} >Delete</ButtonComp>
+        {permissions.find(perm => perm === 'Update Movies') &&
+          <ButtonComp type="button" width="20%" height="27px" onClick={() => navigate("/movies/editMovie/" + movieData._id)}>Edit</ButtonComp>
+        }{" "}
+        {permissions.find(perm => perm === 'Delete Movies') &&
+          <ButtonComp type="button" width="20%" height="27px" onClick={deleteMovie} >Delete</ButtonComp>
+        }
       </div>
 
     </div>

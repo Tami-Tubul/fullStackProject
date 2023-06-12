@@ -7,13 +7,13 @@ import MovieComp from "./Movie";
 
 const MoviesComp = () => {
 
+  const permissions = useSelector(state => state.usersReducer.connectedUser.permissions)
+
   const [valSearch, setValSearch] = useState()
 
   const storeMovies = useSelector(state => state.moviesReducer)
   const dispatch = useDispatch()
   const { state } = useLocation();
-
-  //console.log(state?.previousPath);
 
   const searchInputRef = useRef()
 
@@ -37,41 +37,36 @@ const MoviesComp = () => {
 
   return (<>
 
-    <div className="moviesFiltering">
+    {permissions.find(perm => perm === 'View Movies') ?
+      <>
 
-      <input type="search" placeholder="Find Movie" ref={searchInputRef} />
-      <ButtonComp width="10%" onClick={searchMovie}>Find</ButtonComp>
+        <div className="moviesFiltering">
+          <input type="search" placeholder="Find Movie" ref={searchInputRef} />
+          <ButtonComp width="10%" onClick={searchMovie}>Find</ButtonComp>
+        </div>
 
-    </div>
+        {valSearch && <span style={{ color: "red" }}>{storeMovies.filteredMovies.length} results found</span>}
+          <div className="scroll-div">
+            <br />
+            <div className="grid">
+              {
+                valSearch ?
+                  storeMovies.filteredMovies.map(movie => {
+                    return <MovieComp movieData={movie} key={movie._id} />
+                  })
+                  :
+                  !valSearch && state?.previousPath == "/subscriptions/members" ?
+                    <MovieComp movieData={storeMovies.subscibeMovie} />
+                    :
+                    storeMovies.movies.map(movie => {
+                      return <MovieComp movieData={movie} key={movie._id} />
+                    })
+              }
+            </div>
+          </div>
+    </> : "No permissions to show movies for this user"  }
 
-    {valSearch && <span style={{ color: "red" }}>{storeMovies.filteredMovies.length} results found</span>}
-
-    <div className="scroll-div">
-
-      <br />
-
-      <div className="grid">
-        {
-
-          valSearch ?
-            storeMovies.filteredMovies.map(movie => {
-              return <MovieComp movieData={movie} key={movie._id} />
-            })
-            :
-            !valSearch && state?.previousPath == "/subscriptions/members" ?
-              <MovieComp movieData={storeMovies.subscibeMovie} />
-            :
-            storeMovies.movies.map(movie => {
-              return <MovieComp movieData={movie} key={movie._id} />
-            })
-
-        }
-
-      </div>
-
-    </div>
-
-  </>)
+  </> )
 }
 
 export default MoviesComp;

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import authService from "../Utilities/authService";
 
 const HeaderComp = ({connectedUserData}) => {
-console.log(connectedUserData);
+    
     const navigate = useNavigate()
     const connectedUser = useSelector(state => state.usersReducer.connectedUser)
     const dispatch = useDispatch()

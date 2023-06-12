@@ -10,12 +10,13 @@ const UserComp = ({ userData }) => {
   const dispatch = useDispatch()
 
   const deleteUser = async() => {
-      let status = await utils.deleteItem("http://localhost:5000/api/users" , userData._id)
+    if (window.confirm("Are you sure?")) { 
+    let status = await utils.deleteItem("http://localhost:5000/api/users" , userData._id)
       if (status.data === "deleted!") {
         dispatch({ type: "DELETE_USER", payload: userData._id })
         toast("The user was deleted!", { duration: 3000 })
-
       }
+    }
     }
 
 
