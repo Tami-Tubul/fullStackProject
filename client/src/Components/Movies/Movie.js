@@ -14,10 +14,14 @@ const MovieComp = ({ movieData }) => {
 
   const deleteMovie = async () => {
     if (window.confirm("Are you sure?")) {
-      let status = await utils.deleteItem("http://localhost:5000/api/movies", movieData._id)
-      if (status.data === "deleted!") {
-        dispatch({ type: "DELETE_MOVIE", payload: movieData._id })
-        toast("The movie was deleted!", { duration: 3000 })
+      try {
+        let status = await utils.deleteItem("http://localhost:5000/api/movies", movieData._id)
+        if (status.data === "deleted!") {
+          dispatch({ type: "DELETE_MOVIE", payload: movieData._id })
+          toast("The movie was deleted!", { duration: 3000 })
+        }
+      } catch (error) {
+        toast(error.response.data.message, { duration: 3000 })
       }
     }
   }

@@ -37,21 +37,26 @@ const EditMovieComp = () => {
     }
 
     let updatedMovie = { ...movie, genres: genresStr };
+    try {
 
-    let status = await utils.editItem("http://localhost:5000/api/movies", params.id, updatedMovie)
-    if (status.data === "updated!") {
+      let status = await utils.editItem("http://localhost:5000/api/movies", params.id, updatedMovie)
+      if (status.data === "updated!") {
 
-      dispatch({ type: "UPDATE_MOVIE", payload: updatedMovie })
+        dispatch({ type: "UPDATE_MOVIE", payload: updatedMovie })
 
-      toast("The movie was updated!", { duration: 3000 })
+        toast("The movie was updated!", { duration: 3000 })
 
-      navigate("/movies/allMovies")
+        navigate("/movies/allMovies")
+      }
+    }
+    catch (error) {
+      toast(error.response.data.message, { duration: 3000 })
     }
 
   }
 
   const cancelFunc = () => {
-     navigate(-1)
+    navigate(-1)
   }
 
 

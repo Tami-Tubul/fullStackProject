@@ -18,16 +18,19 @@ const AddMemberComp = () => {
 
    const addMemberFunc = async () => {
 
-      let status = await utils.addItem("http://localhost:5000/api/members", member)
+      try {
+         let status = await utils.addItem("http://localhost:5000/api/members", member)
 
-      if (status.data.message == "created!") {
+         if (status.data.message == "created!") {
 
-         dispatch({ type: "ADD_MEMBER", payload: { ...member, _id: status.data.memberID } })
+            dispatch({ type: "ADD_MEMBER", payload: { ...member, _id: status.data.memberID } })
 
-         toast("The member was created!", { duration: 3000 })
+            toast("The member was created!", { duration: 3000 })
 
-         navigate(-1)
-
+            navigate(-1)
+         }
+      } catch (error) {
+         toast(error.response.data.message, { duration: 3000 })
       }
    }
 
@@ -55,7 +58,7 @@ const AddMemberComp = () => {
                   </FormGroup>
                </form>
             </div>
-         </> : "No permissions to add members for this user" }
+         </> : "No permissions to add members for this user"}
    </>
    )
 }

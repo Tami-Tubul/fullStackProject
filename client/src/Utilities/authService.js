@@ -20,5 +20,5 @@ const getUser = () => {
     return sessionStorage["user"] && JSON.parse(sessionStorage["user"]);
 }
 
-
-export default { login, saveToken, saveUser, getToken ,getUser}
+const authService = { login, saveToken, saveUser, getToken ,getUser}
+export default authService;

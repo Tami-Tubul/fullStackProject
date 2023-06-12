@@ -2,8 +2,9 @@ const express = require("express")
 const router = express.Router();
 
 const subscriptionsBL = require("../BL/subscriptionsBL");
+const { authenticateToken } = require("../BL/authBL");
 
-router.get("/", async function (req, resp, next) {
+router.get("/", authenticateToken, async function (req, resp, next) {
    try {
       let allMembers = await subscriptionsBL.getAllSubscriptions();
       return resp.json(allMembers);
@@ -12,7 +13,7 @@ router.get("/", async function (req, resp, next) {
    }
 })
 
-router.get("/:id", async function (req, resp, next) {
+router.get("/:id",authenticateToken, async function (req, resp, next) {
    try {
       let id = req.params.id;
       let member = await subscriptionsBL.getSubscriptionByID(id);
@@ -22,7 +23,7 @@ router.get("/:id", async function (req, resp, next) {
    }
 })
 
-router.post("/", async function (req, resp, next) {
+router.post("/", authenticateToken,async function (req, resp, next) {
    try {
       let obj = req.body;
       let status = await subscriptionsBL.addSubscription(obj);
@@ -32,7 +33,7 @@ router.post("/", async function (req, resp, next) {
    }
 })
 
-router.put("/:id", async function (req, resp, next) {
+router.put("/:id", authenticateToken,async function (req, resp, next) {
    try {
       let id = req.params.id;
       let obj = req.body;
@@ -43,7 +44,7 @@ router.put("/:id", async function (req, resp, next) {
    }
 })
 
-router.delete("/:id", async function (req, resp, next) {
+router.delete("/:id", authenticateToken, async function (req, resp, next) {
    try {
       let id = req.params.id;
       let status = await subscriptionsBL.deleteSubscription(id);

@@ -2,8 +2,10 @@ const express = require("express")
 const router = express.Router()
 
 const usersBL = require("../BL/usersBL")
+const { authenticateToken } = require("../BL/authBL");
 
-router.get("/", async function (req, resp, next) {
+
+router.get("/", authenticateToken, async function (req, resp, next) {
     try {
         let allUsers = await usersBL.getAllUsers()
         return resp.json(allUsers)
@@ -13,7 +15,7 @@ router.get("/", async function (req, resp, next) {
 })
 
 
-router.get("/:id", async function (req, resp, next) {
+router.get("/:id",authenticateToken , async function (req, resp, next) {
     try {
         let id = req.params.id;
         let user = await usersBL.getUserByID(id)
@@ -23,7 +25,7 @@ router.get("/:id", async function (req, resp, next) {
     }
 })
 
-router.post("/", async function (req, resp, next) {
+router.post("/",authenticateToken , async function (req, resp, next) {
     try {
         let obj = req.body;
         let status = await usersBL.addUser(obj)
@@ -33,7 +35,7 @@ router.post("/", async function (req, resp, next) {
     }
 })
 
-router.put("/:id", async function (req, resp, next) {
+router.put("/:id", authenticateToken, async function (req, resp, next) {
     try {
         let id = req.params.id;
         let obj = req.body;
@@ -44,7 +46,7 @@ router.put("/:id", async function (req, resp, next) {
     }
 })
 
-router.delete("/:id", async function (req, resp, next) {
+router.delete("/:id", authenticateToken, async function (req, resp, next) {
     try {
         let id = req.params.id;
         let status = await usersBL.deleteUser(id)

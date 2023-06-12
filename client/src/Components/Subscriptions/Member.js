@@ -15,11 +15,15 @@ const MemberComp = ({ memberData }) => {
 
   const deleteMember = async () => {
     if (window.confirm("Are you sure?")) {
-      let status = await utils.deleteItem("http://localhost:5000/api/members", memberData._id)
-      if (status.data == "deleted!") {
-        dispatch({ type: "DELETE_MEMBER", payload: memberData._id })
-        toast("The member was deleted!", { duration: 3000 })
-        navigate("/subscriptions/members")
+      try {
+        let status = await utils.deleteItem("http://localhost:5000/api/members", memberData._id)
+        if (status.data == "deleted!") {
+          dispatch({ type: "DELETE_MEMBER", payload: memberData._id })
+          toast("The member was deleted!", { duration: 3000 })
+          navigate("/subscriptions/members")
+        }
+      } catch (error) {
+        toast(error.response.data.message, { duration: 3000 })
       }
     }
   }

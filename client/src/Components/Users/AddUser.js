@@ -58,7 +58,9 @@ const AddUserComp = () => {
   const addUserFunc = async (e) => {
     e.preventDefault();
     let newUser = user;
-    let status = await utils.addItem("http://localhost:5000/api/users", newUser)
+
+    try {
+      let status = await utils.addItem("http://localhost:5000/api/users", newUser)
 
       if (status.data.status === "created!") {
 
@@ -71,6 +73,9 @@ const AddUserComp = () => {
 
         navigate("/usersManagement/users");
       }
+    } catch (error) {
+      toast(error.response.data.message, { duration: 3000 })
+    }
   }
 
 

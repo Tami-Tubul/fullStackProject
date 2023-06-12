@@ -20,20 +20,24 @@ const EditMemberComp = () => {
 
   const updateMember = async (e) => {
     e.preventDefault();
-    let status = await utils.editItem("http://localhost:5000/api/members", params.id, member)
-  
-    if (status.data == "updated!") {
-     
-      dispatch({ type: "UPDATE_MEMBER", payload: member })
-    
-      toast("The member was updated!", { duration: 3000 })
-     
-      navigate("/subscriptions/members")
+    try {
+      let status = await utils.editItem("http://localhost:5000/api/members", params.id, member)
+
+      if (status.data == "updated!") {
+
+        dispatch({ type: "UPDATE_MEMBER", payload: member })
+
+        toast("The member was updated!", { duration: 3000 })
+
+        navigate("/subscriptions/members")
+      }
+    } catch (error) {
+      toast(error.response.data.message, { duration: 3000 })
     }
   }
 
   const cancelFunc = () => {
-      navigate(-1)
+    navigate(-1)
   }
 
   useEffect(() => {

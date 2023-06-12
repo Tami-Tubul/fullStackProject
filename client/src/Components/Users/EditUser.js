@@ -64,12 +64,16 @@ const EditUserComp = () => {
   const updateUser = async (e) => {
     e.preventDefault();
     let updatedUser = user;
-    let status = await utils.editItem("http://localhost:5000/api/users", params.id, updatedUser)
-    if (status.data === "updated!") {
-      dispatch({ type: "UPDATE_USER", payload: updatedUser })
-      toast("The user was updated!", { duration: 3000 })
-      navigate(-1)
+    try {
+      let status = await utils.editItem("http://localhost:5000/api/users", params.id, updatedUser)
+      if (status.data === "updated!") {
+        dispatch({ type: "UPDATE_USER", payload: updatedUser })
+        toast("The user was updated!", { duration: 3000 })
+        navigate(-1)
 
+      }
+    } catch (error) {
+      toast(error.response.data.message, { duration: 3000 })
     }
 
   }
@@ -88,7 +92,7 @@ const EditUserComp = () => {
           <FormControlComp id="sessionTimeOut" type="number" label="Session Time Out (Minutes):" value={user?.sessionTimeOut} onChange={e => setUser({ ...user, sessionTimeOut: e.target.value })} />
           <FormControlComp id="createdDate" type="text" label="Created Date:" value={user?.createdDate} inputProps={{ readOnly: true, }} disabled variant="filled" />
 
-          <FormControl style={{ width:"77%", display:"inline-block", margin:"auto"}} component="fieldset" variant="standard">
+          <FormControl style={{ width: "77%", display: "inline-block", margin: "auto" }} component="fieldset" variant="standard">
             <FormLabel component="legend">permissions:</FormLabel>
             {
               permissionsArr.map((per, index) => {

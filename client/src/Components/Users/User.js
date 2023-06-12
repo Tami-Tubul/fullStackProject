@@ -9,19 +9,23 @@ const UserComp = ({ userData }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const deleteUser = async() => {
-    if (window.confirm("Are you sure?")) { 
-    let status = await utils.deleteItem("http://localhost:5000/api/users" , userData._id)
-      if (status.data === "deleted!") {
-        dispatch({ type: "DELETE_USER", payload: userData._id })
-        toast("The user was deleted!", { duration: 3000 })
+  const deleteUser = async () => {
+    if (window.confirm("Are you sure?")) {
+      try {
+        let status = await utils.deleteItem("http://localhost:5000/api/users", userData._id)
+        if (status.data === "deleted!") {
+          dispatch({ type: "DELETE_USER", payload: userData._id })
+          toast("The user was deleted!", { duration: 3000 })
+        }
+      } catch (error) {
+        toast(error.response.data.message, { duration: 3000 })
       }
     }
-    }
+  }
 
 
   return (
-  
+
     <div className="content-box">
       <div className="text-box">
         <p><strong>Name:</strong>  {userData.firstName} {userData.lastName}</p>
@@ -34,7 +38,7 @@ const UserComp = ({ userData }) => {
         <ButtonComp type="button" width="20%" height="27px" onClick={() => navigate("/usersManagement/editUser/" + userData._id)}>Edit</ButtonComp>{" "}
         <ButtonComp type="button" width="20%" height="27px" onClick={deleteUser} >Delete</ButtonComp>
       </div>
-    </div> 
+    </div>
 
   )
 }

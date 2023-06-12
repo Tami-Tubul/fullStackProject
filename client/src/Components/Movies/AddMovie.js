@@ -29,15 +29,20 @@ const AddMovieComp = () => {
 
     let newMovie = { ...movie, genres: final_genres };
 
-    let status = await utils.addItem("http://localhost:5000/api/movies", newMovie)
+    try {
 
-    if (status.data.message === "created!") {
+      let status = await utils.addItem("http://localhost:5000/api/movies", newMovie)
 
-      dispatch({ type: "ADD_MOVIE", payload: { ...newMovie, _id: status.data.movieID } })
+      if (status.data.message === "created!") {
 
-      toast("The movie was created!", { duration: 3000 })
+        dispatch({ type: "ADD_MOVIE", payload: { ...newMovie, _id: status.data.movieID } })
 
-      navigate("/movies/allMovies")
+        toast("The movie was created!", { duration: 3000 })
+
+        navigate("/movies/allMovies")
+      }
+    } catch (error) {
+         toast(error.response.data.message, { duration: 3000 })
     }
 
   }
