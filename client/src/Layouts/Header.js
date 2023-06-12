@@ -20,7 +20,7 @@ console.log(connectedUserData);
 
     return (
         <>
-            <header></header>
+            <header>
                 <h1>Cinema Website</h1>
                 {connectedUser && <>
                     <NavComp isAdmin={connectedUserData.isAdmin} />
