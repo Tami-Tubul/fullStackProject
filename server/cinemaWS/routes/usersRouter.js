@@ -2,10 +2,10 @@ const express = require("express")
 const router = express.Router()
 
 const usersBL = require("../BL/usersBL")
-const { authenticateToken } = require("../BL/authBL");
+const { authenticateToken, checkUserRole } = require("../BL/authBL");
 
 
-router.get("/", authenticateToken, async function (req, resp, next) {
+router.get("/", authenticateToken, checkUserRole("admin"), async function (req, resp, next) {
     try {
         let allUsers = await usersBL.getAllUsers()
         return resp.json(allUsers)
@@ -15,7 +15,7 @@ router.get("/", authenticateToken, async function (req, resp, next) {
 })
 
 
-router.get("/:id",authenticateToken , async function (req, resp, next) {
+router.get("/:id",authenticateToken , checkUserRole("admin"),async function (req, resp, next) {
     try {
         let id = req.params.id;
         let user = await usersBL.getUserByID(id)
@@ -25,7 +25,7 @@ router.get("/:id",authenticateToken , async function (req, resp, next) {
     }
 })
 
-router.post("/",authenticateToken , async function (req, resp, next) {
+router.post("/",authenticateToken , checkUserRole("admin"),async function (req, resp, next) {
     try {
         let obj = req.body;
         let status = await usersBL.addUser(obj)
@@ -35,7 +35,7 @@ router.post("/",authenticateToken , async function (req, resp, next) {
     }
 })
 
-router.put("/:id", authenticateToken, async function (req, resp, next) {
+router.put("/:id", authenticateToken,checkUserRole("admin"), async function (req, resp, next) {
     try {
         let id = req.params.id;
         let obj = req.body;
@@ -46,7 +46,7 @@ router.put("/:id", authenticateToken, async function (req, resp, next) {
     }
 })
 
-router.delete("/:id", authenticateToken, async function (req, resp, next) {
+router.delete("/:id", authenticateToken, checkUserRole("admin"),async function (req, resp, next) {
     try {
         let id = req.params.id;
         let status = await usersBL.deleteUser(id)

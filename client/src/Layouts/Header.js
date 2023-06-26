@@ -5,17 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import authService from "../Utilities/authService";
 
-const HeaderComp = ({connectedUserData}) => {
-    
+const HeaderComp = ({ connectedUserData }) => {
     const navigate = useNavigate()
-    const connectedUser = useSelector(state => state.usersReducer.connectedUser)
     const dispatch = useDispatch()
+
+    const connectedUser = useSelector(state => state.usersReducer.connectedUser)
 
 
     const logOut = () => {
         sessionStorage.clear();
-        dispatch({ type: "CONNECTED_USER", payload: authService.getUser() })
-        navigate("/auth/login")
+        dispatch({ type: "CONNECTED_USER", payload: authService.getUser() });
+        navigate("/auth/login");
     }
 
     return (
@@ -23,10 +23,10 @@ const HeaderComp = ({connectedUserData}) => {
             <header>
                 <h1>Cinema Website</h1>
                 {connectedUser && <>
-                    <NavComp isAdmin={connectedUserData.isAdmin} />
+                    <NavComp userRole={connectedUserData.role} />
                     <span className="user-name">
                         <i>Hello {connectedUserData.firstName} {connectedUserData.lastName}</i>
-                        <img className="door-icon" src={doorIcon} width="50" onClick={logOut} title="Log out"/>
+                        <img className="door-icon" src={doorIcon} width="50" onClick={logOut} title="Log out" alt="Log out" />
                     </span>
                 </>}
 

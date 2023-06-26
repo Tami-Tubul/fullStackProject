@@ -13,7 +13,7 @@ const getAllUsers = async () => {
             lastName: x.lastName,
             userName: usersDataFromMongo.find(y => y._id == x._id)?.userName,
             password: usersDataFromMongo.find(y => y._id == x._id)?.password,
-            isAdmin: usersDataFromMongo.find(y => y._id == x._id)?.isAdmin,
+            role: usersDataFromMongo.find(y => y._id == x._id)?.role,
             createdDate: x.createdDate,
             sessionTimeOut: x.sessionTimeOut,
             permissions: usersPermissions.find(y => y._id == x._id).permissions
@@ -40,7 +40,7 @@ const getUserByID = async (id) => {
         lastName: user.lastName,
         userName: userDataFromMongo.userName,
         password: userDataFromMongo.password,
-        isAdmin: userDataFromMongo.isAdmin,
+        role: userDataFromMongo.role,
         createdDate: user.createdDate,
         sessionTimeOut: user.sessionTimeOut,
         permissions: userPermissions.permissions

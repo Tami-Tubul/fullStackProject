@@ -9,10 +9,10 @@ let userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    isAdmin: {
-        type: Boolean,
+    role: {
+        type: String,
         require: true,
-        default: false,
+        default: "user",
     }
 })
 

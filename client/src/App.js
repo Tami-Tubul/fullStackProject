@@ -50,7 +50,8 @@ function App() {
         getAllMovies();
         getAllMembers();
 
-    }, [])
+       
+    }, [dispatch])
 
   return (
     <div className='App'>
