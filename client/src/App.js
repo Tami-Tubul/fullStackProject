@@ -50,6 +50,7 @@ function App() {
         getAllMovies();
         getAllMembers();
 
+       
     }, [dispatch])
 
   return (
