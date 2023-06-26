@@ -30,8 +30,8 @@ const MoviesContainerComp = () => {
           <nav>
             <ul>
               <li><NavLink to="allMovies" className={navData => navData.isActive ? "active" : ''}>All Movies</NavLink></li>
-                <li><NavLink to="addMovie" className={navData => navData.isActive ? "active" : ''}>Add Movie</NavLink></li>
-              
+              <li><NavLink to="addMovie" className={navData => navData.isActive ? "active" : ''}>Add Movie</NavLink></li>
+
             </ul>
           </nav>
 

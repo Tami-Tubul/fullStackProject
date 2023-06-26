@@ -1,5 +1,9 @@
 const jwt = require("jsonwebtoken");
+const crypto = require('crypto');
 const usersBL = require("../BL/usersBL")
+
+let RSA_PRIVATE_KEY = crypto.randomBytes(64).toString('hex'); //יצירת מפתח אבטחה אקראי
+
 
 const authLogin = async (req, res, next) => {
     try {
@@ -16,10 +20,10 @@ const authLogin = async (req, res, next) => {
         else {
 
             const userID = userData._id;
-            const RSA_PRIVATE_KEY = "somekey"
+            const userRole = userData.role;
 
             const tokenData = jwt.sign(
-                { id: userID },
+                { id: userID, role: userRole },
                 RSA_PRIVATE_KEY,
                 { expiresIn: `${userData.sessionTimeOut}m` }
             )
@@ -33,10 +37,20 @@ const authLogin = async (req, res, next) => {
 
 };
 
+const authLogout = async (req, res, next) => {
+    try {
+        RSA_PRIVATE_KEY = crypto.randomBytes(64).toString('hex'); // מפתח אבטחה חדש בהתנתקות
+        res.status(200).json({ message: "User disconnected successfully" });
+    }
+    catch (err) {
+        next(err)
+    }
+
+}
+
+
 const authenticateToken = async (req, res, next) => {
-    const RSA_PRIVATE_KEY = "somekey";
     let token = req.headers['x-access-token'];
-    console.log(token);
 
     try {
         if (!token) {
@@ -48,6 +62,10 @@ const authenticateToken = async (req, res, next) => {
                 return res.status(500).json({ message: "Failed to authenticate token." })
 
             else {
+                req.userConnect = {
+                    id: decoded.id,
+                    role: decoded.role
+                }
                 next();
             }
         })
@@ -57,4 +75,13 @@ const authenticateToken = async (req, res, next) => {
     }
 };
 
-module.exports = { authLogin, authenticateToken };
+const checkUserRole = (role) => (req, res, next) => {  //בדיקת תפקיד היוזר כדי לדעת אילו דפים להציג לו ואיזה לא
+    const userRole = req.userConnect.role;
+    if (userRole !== role) {
+        return res.status(403).json({ message: `Access forbidden. Required role: ${role}` });
+    }
+    next();
+};
+
+
+module.exports = { authLogin, authLogout, authenticateToken, checkUserRole };
