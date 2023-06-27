@@ -37,6 +37,34 @@ const authLogin = async (req, res, next) => {
 
 };
 
+const createAccount = async (req, res, next) => {
+    try {
+        const userName = req.body.userName;
+        const password = req.body.password;
+
+        const allUsers = await usersBL.getAllUsers()
+        let userIsExist = allUsers.find(user => user.userName == userName)
+
+        if (!userIsExist) {
+            return res.status(404).json({ message: "Username does not exist!" })
+        }
+        const passwordIsExist = allUsers.find(user => user.password === password)
+        if (passwordIsExist) {
+            return res.status(400).json({ message: "This user already exists in the system!" })
+        }
+        let userUpdated = { ...userIsExist, password: password };
+        const status = await usersBL.editUser(userUpdated._id, userUpdated)
+        if (status === "updated!") {
+            res.status(200).json({ message: "This user's password has been updated!" })
+        }
+       
+    }
+    catch (err) {
+        next(err)
+    }
+
+}
+
 const authLogout = async (req, res, next) => {
     try {
         RSA_PRIVATE_KEY = crypto.randomBytes(64).toString('hex'); // מפתח אבטחה חדש בהתנתקות
@@ -84,4 +112,4 @@ const checkUserRole = (role) => (req, res, next) => {  //בדיקת תפקיד �
 };
 
 
-module.exports = { authLogin, authLogout, authenticateToken, checkUserRole };
+module.exports = { authLogin, createAccount, authLogout, authenticateToken, checkUserRole };

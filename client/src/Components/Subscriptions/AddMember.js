@@ -6,6 +6,7 @@ import ButtonComp from "../../UI/Button";
 import FormControlComp from "../../UI/FormControl";
 import utils from "../../Utilities/utils";
 import toast from 'toast-me';
+import authService from "../../Utilities/authService";
 
 const AddMemberComp = () => {
 
@@ -19,7 +20,9 @@ const AddMemberComp = () => {
    const addMemberFunc = async () => {
 
       try {
-         let status = await utils.addItem("http://localhost:5000/api/members", member)
+         const token = authService.getToken();
+
+         let status = await utils.addItem("http://localhost:5000/api/members", member,token)
 
          if (status.data.message == "created!") {
 

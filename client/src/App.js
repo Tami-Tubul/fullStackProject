@@ -18,6 +18,7 @@ import UsersContainerComp from './Components/Users/UsersContainer';
 import UsersManagementComp from './Components/Users/UsersManagement';
 import HeaderComp from './Layouts/Header';
 import utils from './Utilities/utils';
+import authService from './Utilities/authService';
 
 
 function App() {
@@ -26,32 +27,35 @@ function App() {
 
   const dispatch = useDispatch()
 
-    useEffect(() => {
+  const token = authService.getToken();
+  
+  useEffect(() => {
 
-        //load users
-        const getAllUsers = async () => {
-            const resp = await utils.getAllItems("http://localhost:5000/api/users")
-            dispatch({ type: "LOAD_USERS", payload: resp.data })
-        }
+      //load users
+      const getAllUsers = async () => {
+          const resp = await utils.getAllItems("http://localhost:5000/api/users", token)
+          dispatch({ type: "LOAD_USERS", payload: resp.data })
+      }
 
-        //load movies
-        const getAllMovies = async () => {
-            const resp = await utils.getAllItems("http://localhost:5000/api/movies")
-            dispatch({ type: "LOAD_MOVIES", payload: resp.data })
-        }
+      //load movies
+      const getAllMovies = async () => {
+          const resp = await utils.getAllItems("http://localhost:5000/api/movies", token)
+          dispatch({ type: "LOAD_MOVIES", payload: resp.data })
+      }
 
-        //load members
-        const getAllMembers = async () => {
-            const resp = await utils.getAllItems("http://localhost:5000/api/members")
-            dispatch({ type: "LOAD_MEMBERS", payload: resp.data })
-        }
+      //load members
+      const getAllMembers = async () => {
+          const resp = await utils.getAllItems("http://localhost:5000/api/members", token)
+          dispatch({ type: "LOAD_MEMBERS", payload: resp.data })
+      }
 
-        getAllUsers();
-        getAllMovies();
-        getAllMembers();
+      getAllUsers();
+      getAllMovies();
+      getAllMembers();
 
-       
-    }, [dispatch])
+
+  }, [dispatch,token]) 
+
 
   return (
     <div className='App'>

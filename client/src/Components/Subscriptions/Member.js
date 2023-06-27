@@ -4,6 +4,7 @@ import ButtonComp from '../../UI/Button'
 import utils from '../../Utilities/utils';
 import toast from 'toast-me';
 import WatchedMoviesComp from '../Movies/WatchedMovies';
+import authService from '../../Utilities/authService';
 
 const MemberComp = ({ memberData }) => {
 
@@ -16,7 +17,9 @@ const MemberComp = ({ memberData }) => {
   const deleteMember = async () => {
     if (window.confirm("Are you sure?")) {
       try {
-        let status = await utils.deleteItem("http://localhost:5000/api/members", memberData._id)
+        const token = authService.getToken();
+
+        let status = await utils.deleteItem("http://localhost:5000/api/members", memberData._id,token)
         if (status.data == "deleted!") {
           dispatch({ type: "DELETE_MEMBER", payload: memberData._id })
           toast("The member was deleted!", { duration: 3000 })

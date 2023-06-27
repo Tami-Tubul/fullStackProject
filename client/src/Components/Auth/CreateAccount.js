@@ -1,7 +1,6 @@
 import CardComp from "../../UI/Card";
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
-import utils from '../../Utilities/utils';
 
 import toast from 'toast-me';
 import AlertComp from '../../UI/Alert';
@@ -9,6 +8,7 @@ import ButtonComp from '../../UI/Button';
 import FormControlComp from '../../UI/FormControl';
 import './Auth.css';
 import { FormGroup } from "@mui/material";
+import authService from "../../Utilities/authService";
 
 
 const CreateAccountComp = () => {
@@ -20,30 +20,20 @@ const CreateAccountComp = () => {
   const navigate = useNavigate()
 
   const checkUser = async (e) => {
-    e.preventDefault(); 
-   
-    let resp = await utils.getAllItems("http://localhost:5000/api/users")
-    let allUsers = resp.data;
-    let userIsExist = allUsers.find(x => x.userName === user.userName)
-    let passwordIsExist = allUsers.find(x => x.password === user.password)
+    e.preventDefault();
 
-    if (userIsExist) {
-      if (!passwordIsExist) {
-        userIsExist.password = user.password;
-        let upsatedUser = userIsExist;
-        let status = await utils.editItem("http://localhost:5000/api/users", userIsExist._id, upsatedUser)
-        if (status.data === "updated!") {
-          toast("This user's password has been updated!" ,{ duration: 2000} )
+    let { userName, password } = user;
+    authService.createAccount(userName, password)
+      .then(resp => {
+        if (resp.status === 200) {
+          toast(resp.data.message, { duration: 2000 })
           navigate("/auth/login")
         }
-      }
-      else {
-        setError("This user already exists in the system!")
-      }
-    }
-    else {
-      setError("Username does not exist!")
-    }
+
+      }).catch(err => {
+        setError(err.response.data.message)
+      })
+
   }
 
 

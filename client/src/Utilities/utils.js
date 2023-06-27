@@ -1,36 +1,34 @@
 import axios from 'axios';
-import authService from './authService';
 
-const token = authService.getToken();
 
-const getAllItems = (url) => {
+const getAllItems = (url, token) => {
    return axios.get(url, {
       headers: { 'x-access-token': token }
-    })
+   })
 }
 
-const getItem = (url, id) => {
-   return axios.get(url + "/" + id , {
+const getItem = (url, id, token) => {
+   return axios.get(url + "/" + id, {
       headers: { 'x-access-token': token }
-    })
+   })
 }
 
-const addItem = (url, obj) => {
-   return axios.post(url, obj , {
+const addItem = (url, obj, token) => {
+   return axios.post(url, obj, {
       headers: { 'x-access-token': token }
-    })
+   })
 }
 
-const editItem = (url, id, obj) => {
-   return axios.put(url + "/" + id, obj , {
+const editItem = (url, id, obj, token) => {
+   return axios.put(url + "/" + id, obj, {
       headers: { 'x-access-token': token }
-    })
+   })
 }
 
-const deleteItem = (url, id) => {
-   return axios.delete(url + "/" + id , {
+const deleteItem = (url, id, token) => {
+   return axios.delete(url + "/" + id, {
       headers: { 'x-access-token': token }
-    })
+   })
 }
 
 const utils = { getAllItems, getItem, addItem, editItem, deleteItem };

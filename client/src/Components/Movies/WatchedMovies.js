@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import ButtonComp from "../../UI/Button";
 import utils from "../../Utilities/utils";
 import toast from 'toast-me';
+import authService from "../../Utilities/authService";
 
 
 const WatchedMoviesComp = ({ memberID }) => {
@@ -35,7 +36,9 @@ const WatchedMoviesComp = ({ memberID }) => {
         //הוספת הסרט לטבלת מנויים - זו תהיה הרשומה הראשונה בטבלה!!
         setWatchedMoviesForMember([...watchedMoviesForMember, newWatchMovie]) // add the new movie to comp state
         try {
-            let status = await utils.addItem("http://localhost:5000/api/subscriptions", { memberId: memberID, movies: watchedMoviesForMember })
+            const token = authService.getToken();
+
+            let status = await utils.addItem("http://localhost:5000/api/subscriptions", { memberId: memberID, movies: watchedMoviesForMember },token)
             if (status.data.message === "created!") {
 
                 dispatch({ type: "ADD_WATCHED_MOVIE", payload: { _id: memberID, movies: watchedMoviesForMember } })

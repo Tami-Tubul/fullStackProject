@@ -6,6 +6,7 @@ import ButtonComp from "../../UI/Button";
 import FormControlComp from "../../UI/FormControl"
 import utils from "../../Utilities/utils";
 import toast from 'toast-me';
+import authService from "../../Utilities/authService";
 
 
 const AddMovieComp = () => {
@@ -30,8 +31,9 @@ const AddMovieComp = () => {
     let newMovie = { ...movie, genres: final_genres };
 
     try {
+      const token = authService.getToken();
 
-      let status = await utils.addItem("http://localhost:5000/api/movies", newMovie)
+      let status = await utils.addItem("http://localhost:5000/api/movies", newMovie, token)
 
       if (status.data.message === "created!") {
 
@@ -42,7 +44,7 @@ const AddMovieComp = () => {
         navigate("/movies/allMovies")
       }
     } catch (error) {
-         toast(error.response.data.message, { duration: 3000 })
+      toast(error.response.data.message, { duration: 3000 })
     }
 
   }

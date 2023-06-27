@@ -9,7 +9,7 @@ const MainPageComp = () => {
 
     return (<CardComp>
         <h2 style={{ color: "#E82041" }}>Hi {storeUsers.connectedUser.firstName}</h2>
-        <img src={welcomeGif} />
+        <img src={welcomeGif} alt="welcome"/>
     </CardComp>
 
     )

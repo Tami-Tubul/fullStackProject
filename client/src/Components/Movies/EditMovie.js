@@ -6,6 +6,7 @@ import ButtonComp from "../../UI/Button";
 import FormControlComp from "../../UI/FormControl";
 import utils from "../../Utilities/utils";
 import toast from 'toast-me';
+import authService from "../../Utilities/authService";
 
 
 const EditMovieComp = () => {
@@ -38,8 +39,9 @@ const EditMovieComp = () => {
 
     let updatedMovie = { ...movie, genres: genresStr };
     try {
+      const token = authService.getToken();
 
-      let status = await utils.editItem("http://localhost:5000/api/movies", params.id, updatedMovie)
+      let status = await utils.editItem("http://localhost:5000/api/movies", params.id, updatedMovie, token)
       if (status.data === "updated!") {
 
         dispatch({ type: "UPDATE_MOVIE", payload: updatedMovie })

@@ -6,6 +6,7 @@ import ButtonComp from "../../UI/Button";
 import FormControlComp from "../../UI/FormControl";
 import utils from "../../Utilities/utils";
 import toast from 'toast-me';
+import authService from "../../Utilities/authService";
 
 
 const EditMemberComp = () => {
@@ -21,7 +22,9 @@ const EditMemberComp = () => {
   const updateMember = async (e) => {
     e.preventDefault();
     try {
-      let status = await utils.editItem("http://localhost:5000/api/members", params.id, member)
+      const token = authService.getToken();
+
+      let status = await utils.editItem("http://localhost:5000/api/members", params.id, member,token)
 
       if (status.data == "updated!") {
 

@@ -7,6 +7,7 @@ import ButtonComp from '../../UI/Button';
 import FormControlComp from '../../UI/FormControl';
 
 import toast from 'toast-me';
+import authService from "../../Utilities/authService";
 
 
 
@@ -65,7 +66,9 @@ const EditUserComp = () => {
     e.preventDefault();
     let updatedUser = user;
     try {
-      let status = await utils.editItem("http://localhost:5000/api/users", params.id, updatedUser)
+      const token = authService.getToken();
+
+      let status = await utils.editItem("http://localhost:5000/api/users", params.id, updatedUser,token)
       if (status.data === "updated!") {
         dispatch({ type: "UPDATE_USER", payload: updatedUser })
         toast("The user was updated!", { duration: 3000 })

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import utils from "../../Utilities/utils";
 import toast from 'toast-me';
 import { useDispatch } from "react-redux";
+import authService from "../../Utilities/authService";
 
 const UserComp = ({ userData }) => {
 
@@ -12,7 +13,9 @@ const UserComp = ({ userData }) => {
   const deleteUser = async () => {
     if (window.confirm("Are you sure?")) {
       try {
-        let status = await utils.deleteItem("http://localhost:5000/api/users", userData._id)
+        const token = authService.getToken();
+
+        let status = await utils.deleteItem("http://localhost:5000/api/users", userData._id,token)
         if (status.data === "deleted!") {
           dispatch({ type: "DELETE_USER", payload: userData._id })
           toast("The user was deleted!", { duration: 3000 })

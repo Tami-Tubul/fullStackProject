@@ -6,6 +6,7 @@ import ButtonComp from "../../UI/Button";
 import FormControlComp from "../../UI/FormControl";
 import utils from "../../Utilities/utils";
 import toast from 'toast-me';
+import authService from "../../Utilities/authService";
 
 
 const AddUserComp = () => {
@@ -60,7 +61,9 @@ const AddUserComp = () => {
     let newUser = user;
 
     try {
-      let status = await utils.addItem("http://localhost:5000/api/users", newUser)
+      const token = authService.getToken();
+
+      let status = await utils.addItem("http://localhost:5000/api/users", newUser,token)
 
       if (status.data.status === "created!") {
 

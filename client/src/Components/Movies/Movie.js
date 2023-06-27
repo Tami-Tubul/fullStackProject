@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import utils from "../../Utilities/utils"
 import toast from 'toast-me';
 import ButtonComp from "../../UI/Button";
+import authService from "../../Utilities/authService";
 
 
 const MovieComp = ({ movieData }) => {
@@ -13,9 +14,14 @@ const MovieComp = ({ movieData }) => {
   const dispatch = useDispatch()
 
   const deleteMovie = async () => {
+   
     if (window.confirm("Are you sure?")) {
+     
       try {
-        let status = await utils.deleteItem("http://localhost:5000/api/movies", movieData._id)
+
+        const token = authService.getToken();
+
+        let status = await utils.deleteItem("http://localhost:5000/api/movies", movieData._id,token)
         if (status.data === "deleted!") {
           dispatch({ type: "DELETE_MOVIE", payload: movieData._id })
           toast("The movie was deleted!", { duration: 3000 })
